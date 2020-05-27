@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>How to connect to MongoDB &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">Translate</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../../index.html">
+                    
+                    <span><img alt="NEM logo" src="../../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="how-to-connect-to-mongodb">
+<h1>How to connect to MongoDB<a class="headerlink" href="#how-to-connect-to-mongodb" title="Permalink to this headline">¶</a></h1>
+<p>Learn how to access your API node MongoDB instance.</p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../api.html"><span class="doc">REST Gateway</span></a> offers a broad range of endpoints so that you don’t have to connect to MongoDB. Still, if you are developing new plugins for Symbol, or analyzing extensive blockchain data, you might want to consider connecting to MongoDB directly.</p>
+<p>By the end of this guide, you will be connected to your API node database instance and doing some basic queries.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Complete the <a class="reference internal" href="../../getting-started/setup-workstation.html"><span class="doc">getting started section</span></a>.</li>
+<li>Have an <a class="reference internal" href="running-a-test-net-node.html"><span class="doc">API or Dual node running</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="install-robo-3t">
+<span id="install-robo3t"></span><h2>Install Robo 3T<a class="headerlink" href="#install-robo-3t" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, we are going to use <a href="https://robomongo.org">Robo 3T</a> (formerly RoboMongo), a cross-platform MongoDB management tool, to interact with the database.</p>
+<ol class="arabic simple">
+<li>Download Robo 3T <a class="reference external" href="https://robomongo.org/download">here</a>.</li>
+<li>Open the installer and follow the installation instructions.</li>
+</ol>
+<p>In case of doubt, follow the <a class="reference external" href="https://studio3t.com/knowledge-base/articles/installation/">official installation docs</a>.</p>
+</div>
+<div class="section" id="create-a-new-connection">
+<h2>Create a new connection<a class="headerlink" href="#create-a-new-connection" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Open a new terminal on the computer you are running the node. Then, get the <strong>container’s identifier</strong> running MongoDB with <code class="docutils literal"><span class="pre">docker</span> <span class="pre">ps</span></code>.</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker ps <span class="p">|</span> grep mongo
+
+ea62f033d2a6    mongo    <span class="s2">&quot;docker-entrypoint.s…&quot;</span>    <span class="m">9</span> minutes ago    <span class="m">27017</span>/tcp    api-assembly_db_1
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Once you have the ID, get the <strong>container’s IP</strong> with the command <code class="docutils literal"><span class="pre">docker</span> <span class="pre">inspect</span> <span class="pre">&lt;ID&gt;</span></code>.</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker inspect ea62f033d2a6 <span class="p">|</span> grep <span class="s2">&quot;IPAddress&quot;</span>
+
+<span class="s2">&quot;SecondaryIPAddresses&quot;</span>: null,
+<span class="s2">&quot;IPAddress&quot;</span>: <span class="s2">&quot;&quot;</span>,
+        <span class="s2">&quot;IPAddress&quot;</span>: <span class="s2">&quot;172.20.0.7&quot;</span>,
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Launch Robo 3T and click on the <strong>“Create”</strong> link to add a new connection.</li>
+</ol>
+<div class="figure align-center">
+<img alt="../../_images/robo3t-open.png" src="../../_images/robo3t-open.png" style="width: 700px;" />
+</div>
+<ol class="arabic simple" start="4">
+<li>Enter the following details under the <strong>“Connection”</strong> tab:</li>
+</ol>
+<div class="figure align-center">
+<img alt="../../_images/robo3t-connection.png" src="../../_images/robo3t-connection.png" style="width: 700px;" />
+</div>
+<ul class="simple">
+<li><strong>Type</strong>: Direct Connection</li>
+<li><strong>Name</strong>: my-node</li>
+<li><strong>Address</strong>: 172.20.0.7 (retrieved from the second step)</li>
+<li><strong>Port</strong>: 27017</li>
+</ul>
+<ol class="arabic simple" start="5">
+<li>If the node is running locally, click <strong>“Connect”</strong> and move to the next section <a class="reference internal" href="#querying-mongodb"><span class="std std-ref">Querying MongoDB</span></a>.</li>
+<li>Otherwise, if you are running the node in a <strong>virtual private server</strong> (VPS), create a tunnel first between your computer and the server.</li>
+</ol>
+<p>Go to the <strong>SSH tab</strong> and add the server’s details:</p>
+<div class="figure align-center">
+<img alt="../../_images/robo3t-tunnel.png" src="../../_images/robo3t-tunnel.png" style="width: 700px;" />
+</div>
+<p>Replace the <strong>SSH Address</strong>, <strong>username</strong>, and <strong>authentication</strong> method.</p>
+<ol class="arabic simple" start="7">
+<li>After you click “Connect”, you should see the MongoDB collections under the database named <strong>“catapult”</strong>.</li>
+</ol>
+</div>
+<div class="section" id="querying-mongodb">
+<span id="id1"></span><h2>Querying MongoDB<a class="headerlink" href="#querying-mongodb" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only use this method to read from the database. Do not alter any document directly on MongoDB.</p>
+</div>
+<ol class="arabic simple">
+<li>On the left sidebar, open the collection you want to query.</li>
+</ol>
+<div class="figure align-center">
+<img alt="../../_images/robo3t-collection.png" src="../../_images/robo3t-collection.png" style="width: 700px;" />
+</div>
+<p>2. In most cases, you may want to filter a set of entries by one of its attributes.
+To filter, for example, a given transaction type, write a query with the following format on Robo 3T shell:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>db.getCollection<span class="o">(</span><span class="s1">&#39;transactions&#39;</span><span class="o">)</span>.find<span class="o">(</span> <span class="o">{</span> <span class="s2">&quot;transaction.type&quot;</span>: <span class="m">16724</span><span class="o">})</span>
+</pre></div>
+</div>
+<p>For other advanced queries, check the <a class="reference external" href="https://studio3t.com/knowledge-base/articles/query-mongodb/">Robo3T</a> docs.</p>
+<ol class="arabic simple" start="3">
+<li>Click on the <strong>“Play”</strong> button to execute the query.</li>
+</ol>
+<div class="figure align-center">
+<img alt="../../_images/robo3t-query.png" src="../../_images/robo3t-query.png" style="width: 700px;" />
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>Did you find what you were looking for?</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">Give us your feedback.</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/guides/network/connecting-to-mongodb.rst" rel="nofollow"> <i class="fab fa-github"></i> Improve this page</a>
+</div>
+        <span class="title">On this page</span>
+        <ul>
+<li><a class="reference internal" href="#">How to connect to MongoDB</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-robo-3t">Install Robo 3T</a></li>
+<li><a class="reference internal" href="#create-a-new-connection">Create a new connection</a></li>
+<li><a class="reference internal" href="#querying-mongodb">Querying MongoDB</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

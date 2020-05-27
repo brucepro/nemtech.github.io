@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuring node properties &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">Translate</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../../index.html">
+                    
+                    <span><img alt="NEM logo" src="../../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="configuring-node-properties">
+<h1>Configuring node properties<a class="headerlink" href="#configuring-node-properties" title="Permalink to this headline">¶</a></h1>
+<p>Customize the node configurable parameters.</p>
+<div class="section" id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
+<p>The instructions to configure the node vary depending on the package used to deploy the network.</p>
+<div class="section" id="testnet-bootstrap">
+<h3>Testnet Bootstrap<a class="headerlink" href="#testnet-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p>After running a node for the first time, the file <code class="docutils literal"><span class="pre">config-input.yaml</span></code> will be generated in the folder``symbol-testnet-bootstrap/identity``.</p>
+<p>To edit the node properties, follow the next steps:</p>
+<ol class="arabic simple">
+<li>If the node service is running, run <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">docker-compose</span> <span class="pre">down</span></code> under the same directory you executed the <code class="docutils literal"><span class="pre">up</span></code> command.</li>
+<li>Edit the properties file <code class="docutils literal"><span class="pre">config-input.yaml</span></code> with a text editor.</li>
+<li>Save and apply the changes with the command <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">--build</span> <span class="pre">--detach</span></code>.</li>
+</ol>
+</div>
+<div class="section" id="service-bootstrap">
+<h3>Service Bootstrap<a class="headerlink" href="#service-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p>After running a network for the first time, the folder <code class="docutils literal"><span class="pre">build/catapult-config</span></code> contains all the properties files for the Peer and API nodes that compose the network.</p>
+<p>For example, if you want to edit the <code class="docutils literal"><span class="pre">peer-node-0</span></code> properties, follow the next steps:</p>
+<ol class="arabic simple">
+<li>Stop all the services with the command <code class="docutils literal"><span class="pre">./cmds/stop-all</span></code>.</li>
+<li>Open the properties file to edit under <code class="docutils literal"><span class="pre">peer-node-0/userconfig/resources</span></code> with a text editor.</li>
+<li>Save and apply the changes with the command <code class="docutils literal"><span class="pre">./cmds/start-all</span> <span class="pre">-d</span></code>.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="properties">
+<span id="node-properties"></span><h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>Find below the list of configurable properties.</p>
+<div class="section" id="config-user-properties">
+<h3>config-user.properties<a class="headerlink" href="#config-user-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>account</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>enableDelegatedHarvestersAutoDetection</td>
+<td>bool</td>
+<td>Set to true if potential delegated harvesters should be automatically detected.</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td><strong>storage</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>dataDirectory</td>
+<td>string</td>
+<td>Data directory.</td>
+<td>../data</td>
+</tr>
+<tr class="row-even"><td>certificateDirectory</td>
+<td>string</td>
+<td>Certificate directory.</td>
+<td>../certificate</td>
+</tr>
+<tr class="row-odd"><td>pluginsDirectory</td>
+<td>string</td>
+<td>Plugins directory.</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="config-node-properties">
+<h3>config-node.properties<a class="headerlink" href="#config-node-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>node</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>port</td>
+<td>unsigned short</td>
+<td>Server port.</td>
+<td>7900</td>
+</tr>
+<tr class="row-even"><td>maxIncomingConnectionsPerIdentity</td>
+<td>uint32_t</td>
+<td>Maximum number of incoming connections per identity over primary port.</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>enableAddressReuse</td>
+<td>bool</td>
+<td>Set to true if the server should reuse ports already in use.</td>
+<td>false</td>
+</tr>
+<tr class="row-even"><td>enableSingleThreadPool</td>
+<td>bool</td>
+<td>Set to true if a single thread pool should be used, Set to false if multiple thread pools should be used.</td>
+<td>false</td>
+</tr>
+<tr class="row-odd"><td>enableCacheDatabaseStorage</td>
+<td>bool</td>
+<td>Set to true if cache data should be saved in a database.</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>enableAutoSyncCleanup</td>
+<td>bool</td>
+<td>Set to true if temporary sync files should be automatically cleaned up. <em>Note</em>: This should be Set to false if broker process is running.</td>
+<td>true</td>
+</tr>
+<tr class="row-odd"><td>enableTransactionSpamThrottling</td>
+<td>bool</td>
+<td>Set to true if transaction spam throttling should be enabled.</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>transactionSpamThrottlingMaxBoostFee</td>
+<td>Amount</td>
+<td>Maximum fee that will boost a transaction through the spam throttle when spam throttling is enabled.</td>
+<td>10‘000‘000</td>
+</tr>
+<tr class="row-odd"><td>maxBlocksPerSyncAttempt</td>
+<td>uint32_t</td>
+<td>Maximum number of blocks per sync attempt.</td>
+<td>400</td>
+</tr>
+<tr class="row-even"><td>maxChainBytesPerSyncAttempt</td>
+<td>utils::FileSize</td>
+<td>Maximum chain bytes per sync attempt.</td>
+<td>100MB</td>
+</tr>
+<tr class="row-odd"><td>shortLivedCacheTransactionDuration</td>
+<td>utils::TimeSpan</td>
+<td>Duration of a transaction in the short lived cache.</td>
+<td>10m</td>
+</tr>
+<tr class="row-even"><td>shortLivedCacheBlockDuration</td>
+<td>utils::TimeSpan</td>
+<td>Duration of a block in the short lived cache.</td>
+<td>100m</td>
+</tr>
+<tr class="row-odd"><td>shortLivedCachePruneInterval</td>
+<td>utils::TimeSpan</td>
+<td>Time between short lived cache pruning.</td>
+<td>90s</td>
+</tr>
+<tr class="row-even"><td>shortLivedCacheMaxSize</td>
+<td>uint32_t</td>
+<td>Maximum size of a short lived cache.</td>
+<td>10‘000‘000</td>
+</tr>
+<tr class="row-odd"><td>minFeeMultiplier</td>
+<td>BlockFeeMultiplier</td>
+<td>Minimum fee multiplier of transactions to propagate and include in blocks.</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>transactionSelectionStrategy</td>
+<td>model::TransactionSelectionStrategy</td>
+<td>Transaction selection strategy used for syncing and harvesting unconfirmed transactions.</td>
+<td>oldest</td>
+</tr>
+<tr class="row-odd"><td>unconfirmedTransactionsCacheMaxResponseSize</td>
+<td>utils::FileSize</td>
+<td>Maximum size of an unconfirmed transactions response.</td>
+<td>20MB</td>
+</tr>
+<tr class="row-even"><td>unconfirmedTransactionsCacheMaxSize</td>
+<td>uint32_t</td>
+<td>Maximum size of the unconfirmed transactions cache.</td>
+<td>1‘000‘000</td>
+</tr>
+<tr class="row-odd"><td>connectTimeout</td>
+<td>utils::TimeSpan</td>
+<td>Timeout for connecting to a peer.</td>
+<td>10s</td>
+</tr>
+<tr class="row-even"><td>syncTimeout</td>
+<td>utils::TimeSpan</td>
+<td>Timeout for syncing with a peer.</td>
+<td>60s</td>
+</tr>
+<tr class="row-odd"><td>socketWorkingBufferSize</td>
+<td>utils::FileSize</td>
+<td>Initial socket working buffer size (socket reads will attempt to read buffers of roughly this size).</td>
+<td>512KB</td>
+</tr>
+<tr class="row-even"><td>socketWorkingBufferSensitivity</td>
+<td>uint32_t</td>
+<td>Socket working buffer sensitivity (lower values will cause memory to be more aggressively reclaimed). <em>Note</em>: Set to 0 will disable memory reclamation.</td>
+<td>100</td>
+</tr>
+<tr class="row-odd"><td>maxPacketDataSize</td>
+<td>utils::FileSize</td>
+<td>Maximum packet data size.</td>
+<td>150MB</td>
+</tr>
+<tr class="row-even"><td>blockDisruptorSize</td>
+<td>uint32_t</td>
+<td>Size of the block disruptor circular buffer.</td>
+<td>4096</td>
+</tr>
+<tr class="row-odd"><td>blockElementTraceInterval</td>
+<td>uint32_t</td>
+<td>Multiple of elements at which a block element should be traced through queue and completion.</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>transactionDisruptorSize</td>
+<td>uint32_t</td>
+<td>Size of the transaction disruptor circular buffer.</td>
+<td>16384</td>
+</tr>
+<tr class="row-odd"><td>transactionElementTraceInterval</td>
+<td>uint32_t</td>
+<td>Multiple of elements at which a transaction element should be traced through queue and completion.</td>
+<td>10</td>
+</tr>
+<tr class="row-even"><td>enableDispatcherAbortWhenFull</td>
+<td>bool</td>
+<td>Set to true if the process should terminate when any dispatcher is full.</td>
+<td>true</td>
+</tr>
+<tr class="row-odd"><td>enableDispatcherInputAuditing</td>
+<td>bool</td>
+<td>Set to true if all dispatcher inputs should be audited.</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>maxCacheDatabaseWriteBatchSize</td>
+<td>utils::FileSize</td>
+<td>Maximum cache database write batch size.</td>
+<td>5MB</td>
+</tr>
+<tr class="row-odd"><td>maxTrackedNodes</td>
+<td>uint32_t</td>
+<td>Maximum number of nodes to track in memory.</td>
+<td>5‘000</td>
+</tr>
+<tr class="row-even"><td>batchVerificationRandomSource</td>
+<td>string</td>
+<td>Source of random numbers used in batch verification.</td>
+<td>/dev/urandom</td>
+</tr>
+<tr class="row-odd"><td>trustedHosts</td>
+<td>unordered_set&lt;string&gt;</td>
+<td>Trusted hosts that are allowed to execute protected API calls on this node.</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>localNetworks</td>
+<td>unordered_set&lt;string&gt;</td>
+<td>Networks that should be treated as local.</td>
+<td>127.0.0.1</td>
+</tr>
+<tr class="row-odd"><td><strong>localnode</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>host</td>
+<td>string</td>
+<td>Node host (leave empty to auto-detect IP).</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>friendlyName</td>
+<td>string</td>
+<td>Node friendly name (leave empty to use address).</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>uint32_t</td>
+<td>Node version.</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>roles</td>
+<td>ionet::NodeRoles</td>
+<td>Node roles.</td>
+<td>Peer</td>
+</tr>
+<tr class="row-even"><td><strong>outgoing_connections</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>maxConnections</td>
+<td>uint16_t</td>
+<td>Maximum number of active connections.</td>
+<td>10</td>
+</tr>
+<tr class="row-even"><td>maxConnectionAge</td>
+<td>uint16_t</td>
+<td>Maximum connection age.</td>
+<td>200</td>
+</tr>
+<tr class="row-odd"><td>maxConnectionBanAge</td>
+<td>uint16_t</td>
+<td>Maximum connection ban age.</td>
+<td>20</td>
+</tr>
+<tr class="row-even"><td>numConsecutiveFailuresBeforeBanning</td>
+<td>uint16_t</td>
+<td>Number of consecutive connection failures before a connection is banned.</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td><strong>incoming_connections</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>maxConnections</td>
+<td>uint16_t</td>
+<td>Maximum number of active connections.</td>
+<td>512</td>
+</tr>
+<tr class="row-odd"><td>maxConnectionAge</td>
+<td>uint16_t</td>
+<td>Maximum connection age.</td>
+<td>200</td>
+</tr>
+<tr class="row-even"><td>maxConnectionBanAge</td>
+<td>uint16_t</td>
+<td>Maximum connection ban age.</td>
+<td>20</td>
+</tr>
+<tr class="row-odd"><td>numConsecutiveFailuresBeforeBanning</td>
+<td>uint16_t</td>
+<td>Number of consecutive connection failures before a connection is banned.</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>backlogSize</td>
+<td>uint16_t</td>
+<td>Maximum size of the pending connections queue.</td>
+<td>512</td>
+</tr>
+<tr class="row-odd"><td><strong>banning</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>defaultBanDuration</td>
+<td>utils::TimeSpan</td>
+<td>Default duration for banning.</td>
+<td>12h</td>
+</tr>
+<tr class="row-odd"><td>maxBanDuration</td>
+<td>utils::TimeSpan</td>
+<td>Maximum duration for banning.</td>
+<td>72h</td>
+</tr>
+<tr class="row-even"><td>keepAliveDuration</td>
+<td>utils::TimeSpan</td>
+<td>Duration to keep account in container after the ban expired.</td>
+<td>48h</td>
+</tr>
+<tr class="row-odd"><td>maxBannedNodes</td>
+<td>uint32_t</td>
+<td>Maximum number of banned nodes.</td>
+<td>5‘000</td>
+</tr>
+<tr class="row-even"><td>numReadRateMonitoringBuckets</td>
+<td>uint16_t</td>
+<td>Number of read rate monitoring buckets (Set to 0 to disable read rate monitoring).</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>readRateMonitoringBucketDuration</td>
+<td>utils::TimeSpan</td>
+<td>Duration of each read rate monitoring bucket.</td>
+<td>15s</td>
+</tr>
+<tr class="row-even"><td>maxReadRateMonitoringTotalSize</td>
+<td>utils::FileSize</td>
+<td>Maximum size allowed during full read rate monitoring period.</td>
+<td>100MB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="config-harvesting-properties">
+<h3>config-harvesting.properties<a class="headerlink" href="#config-harvesting-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>harvesting</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>harvesterSigningPrivateKey</td>
+<td>string</td>
+<td>Harvester signing private key.</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>harvesterVrfPrivateKey</td>
+<td>string</td>
+<td>Harvester vrf private key.</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>enableAutoHarvesting</td>
+<td>bool</td>
+<td>Set to true if auto harvesting is enabled.</td>
+<td>false</td>
+</tr>
+<tr class="row-even"><td>maxUnlockedAccounts</td>
+<td>uint32_t</td>
+<td>Maximum number of unlocked accounts.</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>delegatePrioritizationPolicy</td>
+<td>harvesting::DelegatePrioritizationPolicy</td>
+<td>Delegate harvester prioritization policy.</td>
+<td>Importance</td>
+</tr>
+<tr class="row-even"><td>beneficiaryPublicKey</td>
+<td>string</td>
+<td>Public key of the account receiving part of the harvested fee.</td>
+<td>0000000000000000000000000000000000000000000000000000000000000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>Did you find what you were looking for?</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">Give us your feedback.</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/guides/network/configuring-node-properties.rst" rel="nofollow"> <i class="fab fa-github"></i> Improve this page</a>
+</div>
+        <span class="title">On this page</span>
+        <ul>
+<li><a class="reference internal" href="#">Configuring node properties</a><ul>
+<li><a class="reference internal" href="#packages">Packages</a><ul>
+<li><a class="reference internal" href="#testnet-bootstrap">Testnet Bootstrap</a></li>
+<li><a class="reference internal" href="#service-bootstrap">Service Bootstrap</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#properties">Properties</a><ul>
+<li><a class="reference internal" href="#config-user-properties">config-user.properties</a></li>
+<li><a class="reference internal" href="#config-node-properties">config-node.properties</a></li>
+<li><a class="reference internal" href="#config-harvesting-properties">config-harvesting.properties</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

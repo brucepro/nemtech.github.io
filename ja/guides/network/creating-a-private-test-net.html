@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>プライベートテストネットの作成 &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-32x32.png"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="アカウント" href="../../concepts/account.html" />
+    <link rel="prev" title="テストネットノードの立ち上げ" href="running-a-test-net-node.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">翻訳する</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../../index.html">
+                    
+                    <span><img alt="NEM logo" src="../../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">ナビゲーション <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">入門</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">ワークステーションのセットアップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">プライベートテストネットの作成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">ハードウェア要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-requirements">必須環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-requirements">次の必須項目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-test-currency">テスト通貨の取得</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">コンセンサス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">貢献者</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">入門</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">ワークステーションのセットアップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">プライベートテストネットの作成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">ハードウェア要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-requirements">必須環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-requirements">次の必須項目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-test-currency">テスト通貨の取得</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">コンセンサス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">貢献者</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="creating-a-private-test-net">
+<h1>プライベートテストネットの作成<a class="headerlink" href="#creating-a-private-test-net" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このガイドでは、 Symbol のテクノロジーを使用して、独自のプライベートネットワークをセットアップするプロセスを説明しています。</p>
+<p>ネットワークを立ち上げるために <a href="https://github.com/tech-bureau/catapult-service-bootstrap" target="_blank">Catapult Service Bootstrap</a> を使用します。このソフトウェアスイートは開発者が素早く自分のネットワークを構築するための手助けになるセットアップスクリプトが含まれています。</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">このブートストラップの設定は学習と開発を目的としており、本番の Symbol インスタンスを動かすものではありません 。</p>
+</div>
+<p>Symbol Service Bootstrap は次の高レベルアーキテクチャでプライベートネットワークを展開しています:</p>
+<div class="figure align-center" id="id1">
+<img alt="../../_images/four-layer-architecture1.png" src="../../_images/four-layer-architecture1.png" style="width: 500px;" />
+<p class="caption"><span class="caption-text">ブートストラップネットワークアーキテクチャ</span></p>
+</div>
+<ul class="simple">
+<li><strong>peer-node (1 と 2)</strong>: Peer ノードは API がトランザクションを P2P ネットワークにプッシュすると、それを検証します。ノードはコンセンサスアルゴリズムを実行して、新しいブロックを作成して、ネットワークを通して変更を伝播します。</li>
+<li><strong>api-node</strong>: API ノードはトランザクションが検証された後に MongoDB データベースにデータを保存します。これらはパーシャルなアグリゲートボンドトランザクションを識別して保存もします。</li>
+<li><strong>rest-gateway</strong> は HTTP と WebSockets をブロックチェーン上で読み書きアクションが実行できるように構成します。</li>
+</ul>
+<div class="section" id="hardware-requirements">
+<h2>ハードウェア要求<a class="headerlink" href="#hardware-requirements" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Symbol Service Bootstrap は次の <strong>最低必要環境</strong> でテストされています。</p>
+<ul class="simple">
+<li><strong>CPU</strong>: 2 コア以上</li>
+<li><strong>Memory</strong>: 4GB 以上</li>
+<li><strong>HD</strong>: 20GB 以上</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">それほど強力ではないインスタンスでソフトウェアを実行できる場合もありますが、ノードのインストールまたは実行中に問題が発生する場合があります。</p>
+</div>
+</div>
+<div class="section" id="environment-requirements">
+<h2>必須環境<a class="headerlink" href="#environment-requirements" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Linux と Mac OS 用のセットアップスクリプトは Docker を使用して自動化されます。テストネットノードを立ち上げるには、次の Docker ツールをインストールする必要があります。</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.docker.com/install/">docker</a></li>
+<li><a class="reference external" href="https://docs.docker.com/compose/install/">docker-compose</a></li>
+</ul>
+</div>
+<div class="section" id="port-requirements">
+<h2>次の必須項目<a class="headerlink" href="#port-requirements" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>サーバーのホストがインターネットからアクセス可能であり、次のポートが開いていて、使用可能であることを確認してください。</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">7900</span></code> 番ポートはノード間の通信するに catapult-server が使用します。</li>
+<li><code class="docutils literal"><span class="pre">3000</span></code> 番ポートは REST ゲートウェイがエンドポイントを公開してノードとの疎通に使用します。</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>インストール<a class="headerlink" href="#installation" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ol class="arabic simple">
+<li>パッケージの <strong>最新版のダウンロードリンク</strong> またはリポジトリから Git を使用して直接クローンしてください。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/tech-bureau/catapult-service-bootstrap.git
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><code class="docutils literal"><span class="pre">catapult-service-bootstrap</span></code> フォルダを開きます。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> catapult-service-bootstrap
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>(オプション) 起動の前に、ネットワークの <a class="reference internal" href="configuring-network-properties.html"><span class="doc">設定可能なパラメータ</span></a> をカスタマイズします。</li>
+<li>ネットワークの立ち上げ</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./cmds/start-all
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">ターミナルのバックグラウンドで Docker コンテナを実行するには <code class="docutils literal"><span class="pre">--detach</span></code> または <code class="docutils literal"><span class="pre">-d</span></code> オプション使用してサービスをデタッチモードで実行します。</p>
+</div>
+<ol class="arabic simple" start="5">
+<li>次の URL で新しいブラウザタブを開いてノードが実行されていることを確認します: <code class="docutils literal"><span class="pre">localhost:3000/chain/height</span></code></li>
+</ol>
+<p>プロセスを停止するには <code class="docutils literal"><span class="pre">Ctrl+C</span></code> を押下します。</p>
+<p><a class="reference external" href="https://github.com/tech-bureau/catapult-service-bootstrap#bootstrap-scriptscommands">インストレーションノート</a> でより多くのネットワークマネジメントコマンドを見ることができます。</p>
+</div>
+<div class="section" id="getting-test-currency">
+<h2>テスト通貨の取得<a class="headerlink" href="#getting-test-currency" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="../../concepts/account.html"><span class="doc">アカウント</span></a> はあなたが <a class="reference internal" href="../../concepts/mosaic.html"><span class="doc">モザイク</span></a> (トークン) を保有することのできる <strong>預け入れ箱</strong> であり、トランザクションをアナウンスすることでこれらと疎通できます。トランザクションをアナウンスするには、ネットワークを保護・検証するインフラストラクチャを維持する人々へのインセンティブを提供するための <a class="reference internal" href="../../concepts/fees.html"><span class="doc">手数料</span></a> を支払う必要があります。このコストはデフォルトのネットワークトークンである <code class="docutils literal"><span class="pre">cat.currency</span></code> モザイクで支払われます。</p>
+<p>初回の <code class="docutils literal"><span class="pre">catapult-service-bootstrap</span></code> ツールの起動後、利用可能な通貨の供給は、生成されたアカウントに分配されます。これらのアカウントの 1 つをすばやく取得するには、ブロックチェーンとの対話、アカウントの設定、資金の送信など、最も一般的なアクションを便利に実行するコマンドラインツールを使用して保存します。</p>
+<ol class="arabic simple">
+<li>Symbol CLI のインストール</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm install --global symbol-cli
+</pre></div>
+</div>
+<p>2. Open a new terminal window.
+Then, go to the directory where the bootstrap tool has generated the addresses.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span>  build/generated-addresses/
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><code class="docutils literal"><span class="pre">addresses.yaml</span></code> ファイルの内容を表示します。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>cat addresses.yaml
+</pre></div>
+</div>
+<p>4. Under the section <code class="docutils literal"><span class="pre">nemesis_addresses</span></code>, you will find the key pairs which contain <code class="docutils literal"><span class="pre">cat.currency</span></code>.
+Copy the private key of the first account.</p>
+<ol class="arabic simple" start="5">
+<li>前のステップで取得したキーを使用して、コマンド <code class="docutils literal"><span class="pre">symbol-cli</span> <span class="pre">profile</span> <span class="pre">import</span></code> を実行します。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli profile import
+
+Enter network <span class="nb">type</span> <span class="o">(</span>MIJIN_TEST, MIJIN, MAIN_NET, TEST_NET<span class="o">)</span>: TEST_NET
+Enter your private key: <span class="m">123</span>***456
+Enter a Symbol Node URL. <span class="o">(</span>Example: http://localhost:3000<span class="o">)</span>: http://localhost:3000
+Insert profile name: base-profile
+</pre></div>
+</div>
+<p>アカウントの資格情報がターミナルで確認できます。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>Profile stored correctly
+┌─────────────┬──────────────────────────────────────────────────────────────────┐
+│ Property    │ Value                                                            │
+├─────────────┼──────────────────────────────────────────────────────────────────┤
+│ Address     │ SCVG35-ZSPMYP-L2POZQ-JGSVEG-RYOJ3V-BNIU3U-N2E6                   │
+├─────────────┼──────────────────────────────────────────────────────────────────┤
+│ Public Key  │ <span class="m">654</span>...321                                                        │
+├─────────────┼──────────────────────────────────────────────────────────────────┤
+│ Private Key │ <span class="m">123</span>...456                                                        │
+└─────────────┴──────────────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<p>その名が示すように <strong>秘密鍵は常に秘匿されていなければなりません</strong> 。秘密鍵にアクセスできる人はアカウントのコントロールを完全に掌握します。一方で、あなたのアカウントの公開鍵とアドレスはネットワーク上の他の参加者と安全に共有でき、彼らからのトランザクションを受け取ることができるようになります。</p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Now that you have your test network running and an account with some <code class="docutils literal"><span class="pre">cat.currency</span></code>, we recommend you to surf the Symbol Developer Documentation.
+In this portal, you can find detailed information about Symbol’s features and <a class="reference internal" href="../category.html" title="Categories"><span class="xref std std-ref">self-paced guides</span></a> on how to use the software development kits.</p>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>お探しのものは見つかりましたか？</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">フィードバックをください。</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/guides/network/creating-a-private-test-net.rst" rel="nofollow"> <i class="fab fa-github"></i> このページにを加筆修正する</a>
+</div>
+        <span class="title">このページ</span>
+        <ul>
+<li><a class="reference internal" href="#">プライベートテストネットの作成</a><ul>
+<li><a class="reference internal" href="#hardware-requirements">ハードウェア要求</a></li>
+<li><a class="reference internal" href="#environment-requirements">必須環境</a></li>
+<li><a class="reference internal" href="#port-requirements">次の必須項目</a></li>
+<li><a class="reference internal" href="#installation">インストール</a></li>
+<li><a class="reference internal" href="#getting-test-currency">テスト通貨の取得</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

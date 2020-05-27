@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assigning metadata to a mosaic &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">Translate</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../../index.html">
+                    
+                    <span><img alt="NEM logo" src="../../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="assigning-metadata-to-a-mosaic">
+<h1>Assigning metadata to a mosaic<a class="headerlink" href="#assigning-metadata-to-a-mosaic" title="Permalink to this headline">¶</a></h1>
+<p>Add custom data to a mosaic.</p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>Metadata is a Symbol feature that can be used to attach information about <a class="reference internal" href="../../concepts/mosaic.html"><span class="doc">mosaics</span></a>.
+For example, small pieces of data such as legal name, ticker, or ISIN, can be assigned as on-chain <a class="reference internal" href="../../concepts/metadata.html"><span class="doc">metadata</span></a>, while sizable documents, like the prospectus or investor agreement, can be kept off-chain.</p>
+<p>In this tutorial, you are going to implement a program to add relevant data to a mosaic.
+Imagine that the company ComfyClothingCompany has applied for an <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number" target="_blank">ISIN code</a> to conduct an STO.
+After receiving the code <code class="docutils literal"><span class="pre">US0000000000</span></code>, the company decided to represent the company shares creating a mosaic named <code class="docutils literal"><span class="pre">cc.shares</span></code>.
+Before distributing the shares between the investors, ComfyClothingCompany wants to attach its ISIN code and legal name to the shares definition.</p>
+<div class="figure align-center">
+<img alt="../../_images/metadata-mosaic.png" src="../../_images/metadata-mosaic.png" style="width: 550px;" />
+</div>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Complete the <a class="reference internal" href="../../getting-started/setup-workstation.html"><span class="doc">getting started section</span></a>.</li>
+<li>Create a new <a class="reference internal" href="../../getting-started/setup-workstation.html#setup-creating-a-test-account"><span class="std std-ref">account</span></a>.</li>
+<li>Load the account with enough <code class="docutils literal"><span class="pre">symbol.xym</span></code> to pay for transaction fees, create mosaics and register namespaces.</li>
+</ul>
+</div>
+<div class="section" id="creating-the-shares">
+<h2>Creating the shares<a class="headerlink" href="#creating-the-shares" title="Permalink to this headline">¶</a></h2>
+<p>1. Create a mosaic to represent the shares.
+The mosaic we are creating will have the properties <code class="docutils literal"><span class="pre">supplyMutable</span></code>, <code class="docutils literal"><span class="pre">transferable</span></code>, <code class="docutils literal"><span class="pre">restrictable</span></code>, <code class="docutils literal"><span class="pre">non-expiring</span></code>, and we will be able to operate with up to 2 decimal places.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli transaction mosaic --sync
+
+Do you want an non-expiring mosaic? <span class="o">[</span>y/n<span class="o">]</span>: y
+Enter mosaic divisibility: <span class="m">2</span>
+Do you want mosaic to have supply mutable? <span class="o">[</span>y/n<span class="o">]</span>: y
+Do you want mosaic to be transferable? <span class="o">[</span>y/n<span class="o">]</span>: y
+Do you want mosaic to be restrictable? <span class="o">[</span>y/n<span class="o">]</span>: y
+Enter max_fee <span class="o">(</span>absolute amount<span class="o">)</span>: <span class="m">0</span>
+Enter amount of tokens: <span class="m">100</span>
+The new mosaic id is:  2C08D5EDB652AA79
+Transaction confirmed.
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>To make the mosaic easily identifiable in the network, create the namespace <code class="docutils literal"><span class="pre">cc</span></code> and the subnamespace <code class="docutils literal"><span class="pre">cc.shares</span></code>.</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli transaction namespace --sync
+
+Enter namespace name: cc
+Do you want to create a root namespace? <span class="o">[</span>y/n<span class="o">]</span>: y
+Enter the namespace rental duration: <span class="m">172800</span>
+Enter max_fee <span class="o">(</span>absolute amount<span class="o">)</span>: <span class="m">0</span>
+Transaction confirmed.
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli transaction namespace --sync
+
+Enter namespace name: shares
+Do you want to create a root namespace? <span class="o">[</span>y/n<span class="o">]</span>: n
+Enter the parent namespace name: cc
+Enter max_fee <span class="o">(</span>absolute amount<span class="o">)</span>: <span class="m">0</span>
+Transaction confirmed.
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Link the subnamespace <code class="docutils literal"><span class="pre">cc.shares</span></code> with the <code class="docutils literal"><span class="pre">mosaicId</span></code> you have created in the first step.</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli transaction mosaicalias --sync
+
+Enter namespace name: cc.shares
+Enter <span class="nb">alias</span> action <span class="o">(</span><span class="m">1</span>: Link, <span class="m">0</span>: Unlink<span class="o">)</span>: <span class="m">1</span>
+Enter mosaic in hexadecimal format: 2C08D5EDB652AA79
+Enter max_fee <span class="o">(</span>absolute amount<span class="o">)</span>: <span class="m">0</span>
+Transaction confirmed.
+</pre></div>
+</div>
+</div>
+<div class="section" id="method-01-using-the-sdk">
+<h2>Method #01: Using the SDK<a class="headerlink" href="#method-01-using-the-sdk" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Now that you have created <code class="docutils literal"><span class="pre">cc.shares</span></code>, define two <code class="docutils literal"><span class="pre">MosaicMetatadaTransaction</span></code> to add the <strong>ISIN</strong> and <strong>legal name</strong> to the mosaic:</li>
+</ol>
+<ol class="upperalpha simple">
+<li>Key: <code class="docutils literal"><span class="pre">ISIN</span></code>, Value: <code class="docutils literal"><span class="pre">US00000000</span></code>.</li>
+</ol>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.ts">View Code</a></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="c1">// replace with network type</span>
+<span class="kr">const</span> <span class="nx">networkType</span> <span class="o">=</span> <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">TEST_NET</span><span class="p">;</span>
+<span class="c1">// replace with company private key</span>
+<span class="kr">const</span> <span class="nx">companyPrivateKey</span> <span class="o">=</span> <span class="s1">&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">companyAccount</span> <span class="o">=</span> <span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="nx">companyPrivateKey</span><span class="p">,</span> <span class="nx">networkType</span><span class="p">);</span>
+<span class="c1">// replace with mosaic id</span>
+<span class="kr">const</span> <span class="nx">mosaicId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NamespaceId</span><span class="p">(</span><span class="s1">&#39;cc.shares&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">isin</span> <span class="o">=</span> <span class="s1">&#39;US00000000&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">isinMetadataTransaction</span> <span class="o">=</span> <span class="nx">MosaicMetadataTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">,</span>
+    <span class="nx">KeyGenerator</span><span class="p">.</span><span class="nx">generateUInt64Key</span><span class="p">(</span><span class="s1">&#39;ISIN&#39;</span><span class="p">),</span>
+    <span class="nx">mosaicId</span><span class="p">,</span>
+    <span class="nx">isin</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+    <span class="nx">isin</span><span class="p">,</span>
+    <span class="nx">networkType</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.js">View Code</a></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="c1">// replace with network type</span>
+<span class="kr">const</span> <span class="nx">networkType</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">TEST_NET</span><span class="p">;</span>
+<span class="c1">// replace with company private key</span>
+<span class="kr">const</span> <span class="nx">companyPrivateKey</span> <span class="o">=</span> <span class="s1">&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">companyAccount</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="nx">companyPrivateKey</span><span class="p">,</span> <span class="nx">networkType</span><span class="p">);</span>
+<span class="c1">// replace with mosaic id</span>
+<span class="kr">const</span> <span class="nx">mosaicId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NamespaceId</span><span class="p">(</span><span class="s1">&#39;cc.shares&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">isin</span> <span class="o">=</span> <span class="s1">&#39;US00000000&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">isinMetadataTransaction</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">MosaicMetadataTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">KeyGenerator</span><span class="p">.</span><span class="nx">generateUInt64Key</span><span class="p">(</span><span class="s1">&#39;ISIN&#39;</span><span class="p">),</span> <span class="nx">mosaicId</span><span class="p">,</span> <span class="nx">isin</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">isin</span><span class="p">,</span> <span class="nx">networkType</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="upperalpha simple" start="2">
+<li>Key: <code class="docutils literal"><span class="pre">NAME</span></code>, Value: <code class="docutils literal"><span class="pre">ComfyClothingCompany</span></code>.</li>
+</ol>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.ts">View Code</a></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;ComfyClothingCompany&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">nameMetadataTransaction</span> <span class="o">=</span> <span class="nx">MosaicMetadataTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">,</span>
+    <span class="nx">KeyGenerator</span><span class="p">.</span><span class="nx">generateUInt64Key</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">),</span>
+    <span class="nx">mosaicId</span><span class="p">,</span>
+    <span class="nx">name</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+    <span class="nx">name</span><span class="p">,</span>
+    <span class="nx">networkType</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.js">View Code</a></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;ComfyClothingCompany&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">nameMetadataTransaction</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">MosaicMetadataTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">KeyGenerator</span><span class="p">.</span><span class="nx">generateUInt64Key</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">),</span> <span class="nx">mosaicId</span><span class="p">,</span> <span class="nx">name</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">networkType</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>2. All metadata is attached only with the consent of the mosaic creator through Aggregate Transactions.
+Wrap the <strong>metadata transactions</strong> inside an <a class="reference internal" href="../../concepts/aggregate-transaction.html#aggregate-complete"><span class="std std-ref">AggregateCompleteTransaction</span></a> and sign the aggregate with the company’s account.</p>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.ts">View Code</a></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">aggregateTransaction</span> <span class="o">=</span> <span class="nx">AggregateTransaction</span><span class="p">.</span><span class="nx">createComplete</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="p">[</span><span class="nx">isinMetadataTransaction</span><span class="p">.</span><span class="nx">toAggregate</span><span class="p">(</span><span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicAccount</span><span class="p">),</span>
+        <span class="nx">nameMetadataTransaction</span><span class="p">.</span><span class="nx">toAggregate</span><span class="p">(</span><span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicAccount</span><span class="p">)],</span>
+    <span class="nx">networkType</span><span class="p">,</span>
+    <span class="p">[],</span>
+    <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">2000000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.js">View Code</a></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">aggregateTransaction</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">AggregateTransaction</span><span class="p">.</span><span class="nx">createComplete</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="p">[</span><span class="nx">isinMetadataTransaction</span><span class="p">.</span><span class="nx">toAggregate</span><span class="p">(</span><span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicAccount</span><span class="p">),</span>
+    <span class="nx">nameMetadataTransaction</span><span class="p">.</span><span class="nx">toAggregate</span><span class="p">(</span><span class="nx">companyAccount</span><span class="p">.</span><span class="nx">publicAccount</span><span class="p">)],</span> <span class="nx">networkType</span><span class="p">,</span> <span class="p">[],</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">2000000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this example, the account signing the transaction is the creator of the mosaic. For that reason, the aggregate can be defined as complete. If a different account owned the mosaic, you would set the <a class="reference internal" href="../../concepts/aggregate-transaction.html#aggregate-bonded"><span class="std std-ref">aggregate as bonded</span></a>, and the mosaic creator would opt-in the metadata request by <a class="reference internal" href="../aggregate/signing-announced-aggregate-bonded-transactions.html"><span class="doc">cosigning the transaction</span></a>.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li>Sign and announce the <strong>AggregateTransaction</strong> to the network.</li>
+</ol>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.ts">View Code</a></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="c1">// replace with meta.networkGenerationHash (nodeUrl + &#39;/node/info&#39;)</span>
+<span class="kr">const</span> <span class="nx">networkGenerationHash</span> <span class="o">=</span> <span class="s1">&#39;4009619EB7A9F824C5D0EE0E164E0F99CCD7906A475D7768FD60B452204BD0A2&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">signedTransaction</span> <span class="o">=</span> <span class="nx">companyAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">aggregateTransaction</span><span class="p">,</span> <span class="nx">networkGenerationHash</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">signedTransaction</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+
+<span class="c1">// replace with node endpoint</span>
+<span class="kr">const</span> <span class="nx">nodeUrl</span> <span class="o">=</span> <span class="s1">&#39;http://api-01.ap-northeast-1.testnet-0951-v1.symboldev.network:3000&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">repositoryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RepositoryFactoryHttp</span><span class="p">(</span><span class="nx">nodeUrl</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">transactionHttp</span> <span class="o">=</span> <span class="nx">repositoryFactory</span><span class="p">.</span><span class="nx">createTransactionRepository</span><span class="p">();</span>
+
+<span class="nx">transactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">signedTransaction</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/metadata/AssigningMetadataToAMosaic.js">View Code</a></span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="c1">// replace with meta.networkGenerationHash (nodeUrl + &#39;/node/info&#39;)</span>
+<span class="kr">const</span> <span class="nx">networkGenerationHash</span> <span class="o">=</span> <span class="s1">&#39;4009619EB7A9F824C5D0EE0E164E0F99CCD7906A475D7768FD60B452204BD0A2&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">signedTransaction</span> <span class="o">=</span> <span class="nx">companyAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">aggregateTransaction</span><span class="p">,</span> <span class="nx">networkGenerationHash</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">signedTransaction</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+<span class="c1">// replace with node endpoint</span>
+<span class="kr">const</span> <span class="nx">nodeUrl</span> <span class="o">=</span> <span class="s1">&#39;http://api-01.ap-northeast-1.testnet-0951-v1.symboldev.network:3000&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">repositoryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">RepositoryFactoryHttp</span><span class="p">(</span><span class="nx">nodeUrl</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">transactionHttp</span> <span class="o">=</span> <span class="nx">repositoryFactory</span><span class="p">.</span><span class="nx">createTransactionRepository</span><span class="p">();</span>
+<span class="nx">transactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">signedTransaction</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li>When the transaction gets confirmed, <a class="reference internal" href="getting-metadata-entries-attached-to-a-mosaic.html"><span class="doc">fetch the mosaic metadata entries</span></a>.</li>
+</ol>
+</div>
+<div class="section" id="method-02-using-the-cli">
+<h2>Method #02: Using the CLI<a class="headerlink" href="#method-02-using-the-cli" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/bash/metadata/AssigningMetadataToAMosaic.sh">View Code</a></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli transaction mosaicmetadata --target-public-key 20330294DC18D96BDEEF32FB02338A6462A0469CB451A081DE2F05B4302C0C0A --mosaic-id 2C08D5EDB652AA79 --key BC2FC3ACFF58FF89 --value US00000000
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>Did you find what you were looking for?</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">Give us your feedback.</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/guides/metadata/assigning-metadata-entries-to-a-mosaic.rst" rel="nofollow"> <i class="fab fa-github"></i> Improve this page</a>
+</div>
+        <span class="title">On this page</span>
+        <ul>
+<li><a class="reference internal" href="#">Assigning metadata to a mosaic</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#creating-the-shares">Creating the shares</a></li>
+<li><a class="reference internal" href="#method-01-using-the-sdk">Method #01: Using the SDK</a></li>
+<li><a class="reference internal" href="#method-02-using-the-cli">Method #02: Using the CLI</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

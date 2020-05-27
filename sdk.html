@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SDK &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="_static/favicon-32x32.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CLI" href="cli.html" />
+    <link rel="prev" title="Server" href="server.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">Translate</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="index.html">
+                    
+                    <span><img alt="NEM logo" src="_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/network/running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/network/creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-languages">Supported languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-libraries">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/contributors.html">Contributors</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/network/running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/network/creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-languages">Supported languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-libraries">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/contributors.html">Contributors</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="sdk">
+<h1>SDK<a class="headerlink" href="#sdk" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>Symbol SDK</strong> is the primary software development tool to create Symbol components, such as additional tools, libraries, or applications.
+It enables developers to focus on their product rather than on the specific API details due to its higher abstraction.</p>
+<p>The Symbol SDK shares the same design between programming languages to accomplish the next properties:</p>
+<ul class="simple">
+<li><strong>Fast language adaptation</strong>: For example, there is a Symbol SDK for Java, but you need to work on C++. As both SDKs share the same design, you could re-write the library faster, adapting the syntax to your language. The same principle also applies to code examples, projects, applications…</li>
+<li><strong>Cohesion/shared knowledge across developers</strong>: Every developer should be able to change between projects that use Symbol. By sharing the same design, we also share the same best practices among projects.</li>
+<li><strong>Fast SDK updates</strong>: Migrating any improvement from a Symbol SDK to the other is faster. Also, if any bug appears in one language, it is quicker to check and fix it.</li>
+</ul>
+<div class="section" id="supported-languages">
+<h2>Supported languages<a class="headerlink" href="#supported-languages" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Language</th>
+<th class="head">Repository</th>
+<th class="head">Reference</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TypeScript&amp; JavaScript SDK</td>
+<td><a href="https://github.com/nemtech/symbol-sdk-typescript-javascript" target="_blank">Repository</a></td>
+<td><a class="reference internal" href="references/typescript-sdk.html"><span class="doc">Documentation</span></a></td>
+</tr>
+<tr class="row-odd"><td>Java SDK</td>
+<td><a href="https://github.com/nemtech/symbol-sdk-java" target="_blank">Repository</a></td>
+<td><a class="reference internal" href="references/java-sdk.html"><span class="doc">Documentation</span></a></td>
+</tr>
+</tbody>
+</table>
+<p>Learn how to use Symbol’s SDK following the <a class="reference internal" href="guides/category.html" title="Categories"><span class="xref std std-ref">guided implementation examples</span></a>.</p>
+<p>If you want to create a new SDK, check the <a class="reference internal" href="guidelines/sdk-development.html"><span class="doc">development guidelines</span></a>.</p>
+</div>
+<div class="section" id="other-libraries">
+<h2>Other libraries<a class="headerlink" href="#other-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Symbol developers have created other libraries that improve and add new features on top of Symbol.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://github.com/luxtagofficial/Apostille-library">apostille</a></td>
+<td>Transferable, updatable, branded, and conjointly owned blockchain notarizations.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/nemfoundation/symbol-data-lib/">symbol-data-lib</a></td>
+<td>Library to debug rand access Symbol node data.</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/nemfoundation/symbol-hd-wallets/">symbol-hd-wallets</a></td>
+<td>Hyper-deterministic wallets library for Symbol.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/nemfoundation/symbol-qr-library/">symbol-qr-library</a></td>
+<td>QR library for Symbol.</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/nemfoundation/symbol-uri-scheme/">symbol-uri-scheme</a></td>
+<td>URI Scheme library for Symbol.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/CrackTheCode016/nem2-secret-sharing/">nem2-secret-sharing</a></td>
+<td>Implementing Shamir’s secret sharing on Symbol.</td>
+</tr>
+</tbody>
+</table>
+<p>To make a library official, the library should be proposed through the <a href="https://github.com/nemtech/NIP" target="_blank">NEM Improvement Proposal</a> process.</p>
+<p>The reason behind the <a href="https://github.com/nemtech/NIP" target="_blank">NEM Improvement Proposal</a> is to ensure that:</p>
+<ul class="simple">
+<li>The specification has been discussed and accepted.</li>
+<li>The new library is reviewed, tested and shared among Symbol developers.</li>
+<li>The library is compatible with third-party projects that uses the same specification.</li>
+</ul>
+</div>
+<div class="section" id="guides">
+<h2>Guides<a class="headerlink" href="#guides" title="Permalink to this headline">¶</a></h2>
+<ul class="postlist-style-circle postlist">
+<li><p class="first"><a class="reference internal" href="getting-started/setup-workstation.html">Setting up your workstation</a></p>
+<p>This first guide will walk you through a step-by-step installation of the required tools to start developing with Symbol.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/account/creating-an-account.html">Creating an account</a></p>
+<p>Create a new Symbol account to start sending and receiving transactions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/account/getting-account-information.html">Getting the account information</a></p>
+<p>Get the public key and balance of an account.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></p>
+<p>Define, sign, and announce a transfer transaction.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/mosaic/creating-a-mosaic.html">Creating a mosaic</a></p>
+<p>Tokenize an asset using mosaics.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/blockchain/getting-block-by-height.html">Getting a block by height</a></p>
+<p>Get the block information given a height.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/namespace/registering-a-namespace.html">Registering a namespace</a></p>
+<p>Create a unique name to identify your assets.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/aggregate/signing-announced-aggregate-bonded-transactions.html">Cosigning aggregate bonded transactions</a></p>
+<p>How to cosign aggregate bonded transactions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/namespace/registering-a-subnamespace.html">Creating a subnamespace</a></p>
+<p>Once you have a registered root <a class="reference internal" href="concepts/namespace.html"><span class="doc">namespace</span></a>, you can create up to <code class="docutils literal"><span class="pre">3</span></code> levels of subnamespaces to organize your assets.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/blockchain/listening-new-blocks.html">Listening to new blocks</a></p>
+<p>Get notified when a new block is included.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/mosaic/modifying-mosaic-supply.html">Modifying the mosaic supply</a></p>
+<p>If a mosaic was created with the “<strong>Supply Mutable</strong>” property, you can make more tokens or reduce the total supply.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/account/reading-transactions-from-an-account.html">Reading transactions from an account</a></p>
+<p>Get the list of transactions where an account is involved.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/namespace/link-a-namespace-to-a-mosaic.html">Linking a namespace to a mosaic</a></p>
+<p>Alias an mosaic with a namespace so that others can reference it in a more friendly way when issuing transactions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/namespace/link-a-namespace-to-an-address.html">Linking a namespace to an address</a></p>
+<p>Alias an address with a namespace so that others can reference the account in a more friendly way when issuing transactions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/mosaic/getting-mosaic-information.html">Getting the mosaic information</a></p>
+<p>Get the ownership, divisibility, duration, and flags for a given mosaic identifier.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/namespace/getting-namespace-information.html">Getting the namespace information</a></p>
+<p>Get the ownership and duration for a given namespace identifier.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/namespace/extending-a-namespace-registration-period.html">Extending a namespace registration period</a></p>
+<p>This guide shows you how to extend the rental period of a namespace.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/assigning-metadata-entries-to-an-account.html">Assigning metadata to an account</a></p>
+<p>Add custom data to an account.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/assigning-metadata-entries-to-a-mosaic.html">Assigning metadata to a mosaic</a></p>
+<p>Add custom data to a mosaic.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/assigning-metadata-entries-to-a-namespace.html">Assigning metadata to a namespace</a></p>
+<p>Add custom data to a namespace.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/getting-metadata-entries-attached-to-an-account.html">Getting metadata entries attached to an account</a></p>
+<p>Get the list of metadata entries attached to an account.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/restriction/getting-mosaic-global-restrictions-attached-to-a-mosaic.html">Getting mosaic global restrictions attached to a mosaic</a></p>
+<p>Get the list of mosaic global restrictions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/getting-metadata-entries-attached-to-a-mosaic.html">Getting metadata entries attached to a mosaic</a></p>
+<p>Get the list of metadata entries attached to an mosaic.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/getting-metadata-entries-attached-to-a-namespace.html">Getting metadata entries attached to a namespace</a></p>
+<p>Get the list of metadata entries attached to an namespace.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/restriction/getting-mosaic-address-restrictions-attached-to-an-account.html">Getting mosaic address restrictions attached to an account</a></p>
+<p>Get the list of mosaic address restrictions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/metadata/updating-metadata-entries.html">Updating metadata entries</a></p>
+<p>Update any existent metadata entry.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="guides/restriction/getting-account-restrictions-attached-to-an-address.html">Getting the account restrictions attached to an address</a></p>
+<p>Get the list of account’s restrictions.</p>
+</li>
+</ul>
+</div>
+</div>
+
+  <div class="section">
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>Did you find what you were looking for?</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">Give us your feedback.</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/sdk.rst" rel="nofollow"> <i class="fab fa-github"></i> Improve this page</a>
+</div>
+        <span class="title">On this page</span>
+        <ul>
+<li><a class="reference internal" href="#">SDK</a><ul>
+<li><a class="reference internal" href="#supported-languages">Supported languages</a></li>
+<li><a class="reference internal" href="#other-libraries">Other libraries</a></li>
+<li><a class="reference internal" href="#guides">Guides</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

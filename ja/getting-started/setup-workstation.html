@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ワークステーションのセットアップ &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_tabs/tabs.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_tabs/semantic-ui-2.2.10/segment.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_tabs/semantic-ui-2.2.10/menu.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_tabs/semantic-ui-2.2.10/tab.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_tabs/semantic-ui-2.2.10/tab.min.js"></script>
+    <script type="text/javascript" src="../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon-32x32.png"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="はじめてのアプリケーションを作成" href="first-application.html" />
+    <link rel="prev" title="Symbol 開発者" href="../index.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">翻訳する</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../index.html">
+                    
+                    <span><img alt="NEM logo" src="../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">ナビゲーション <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">入門</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ワークステーションのセットアップ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-account">アカウントの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-test-currency">テスト通貨の取得</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-project">プロジェクトの作成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/creating-a-private-test-net.html">プライベートテストネットの作成</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/consensus-algorithm.html">コンセンサス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributors.html">貢献者</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">入門</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ワークステーションのセットアップ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-account">アカウントの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-test-currency">テスト通貨の取得</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-project">プロジェクトの作成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/creating-a-private-test-net.html">プライベートテストネットの作成</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/consensus-algorithm.html">コンセンサス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributors.html">貢献者</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="setting-up-your-workstation">
+<h1>ワークステーションのセットアップ<a class="headerlink" href="#setting-up-your-workstation" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>最初のガイドでは Symbol 開発を始めるために必要なツールのインストールをステップバイステップに進めていきます。</p>
+<p>は将来のパブリックメインネットワークと同じテクノロジーと機能を反映している <strong>テストネットワーク</strong> を使用します。テストネットを実験的に使用することで、貴重な資産を失うことなく Symbol が提供するトランザクションセットを試すことができます。</p>
+<div class="section" id="creating-an-account">
+<span id="setup-creating-a-test-account"></span><h2>アカウントの作成<a class="headerlink" href="#creating-an-account" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="../concepts/account.html"><span class="doc">アカウント</span></a> はあなたが <a class="reference internal" href="../concepts/mosaic.html"><span class="doc">モザイク</span></a> (トークン) を保有することのできる、預け入れ箱であり、 <a class="reference internal" href="../concepts/transaction.html"><span class="doc">トランザクションをアナウンス</span></a> することでこれらと疎通できます。</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">Symbol CLI は Node.js 12 LTS を実行に必要とします。</p>
+</div>
+<ol class="arabic simple">
+<li>次のコマンドを新しいターミナルで実行して Symbol CLI をインストールします:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm install --global symbol-cli@0.19.2
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>新しいアカウントを生成して <strong>profile</strong> として保存します</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli account generate
+
+Enter network <span class="nb">type</span> <span class="o">(</span>MIJIN_TEST, MIJIN, MAIN_NET, TEST_NET<span class="o">)</span>: TEST_NET
+Do you want to save the account? <span class="o">[</span>y/n<span class="o">]</span>: y
+Enter Symbol Node URL. <span class="o">(</span>Example: http://localhost:3000<span class="o">)</span>: http://api-01.ap-northeast-1.testnet-0951-v1.symboldev.network:3000/
+Insert the profile name: testnet
+Do you want to <span class="nb">set</span> the account as the default profile? <span class="o">[</span>y/n<span class="o">]</span>: y
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">テストネットワークノードが動いていない場合は <a href="http://explorer-951.symboldev.network/nodes" target="_blank">this list</a> から他のノードを使用できます。この <a class="reference internal" href="../guides/network/running-a-test-net-node.html"><span class="doc">ガイド</span></a> に従って <strong>テストネットノードを実行</strong> することもできます。</p>
+</div>
+<ol class="arabic simple" start="3">
+<li>アカウントの資格情報がターミナルで確認できます。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>Profile stored correctly
+┌─────────────┬──────────────────────────────────────────────────────────────────┐
+│ Property    │ Value                                                            │
+├─────────────┼──────────────────────────────────────────────────────────────────┤
+│ Address     │ TCVQ2R-XKJQKH-4RJZWG-DARWJ6-V4J4W7-F4DGH6-ZFAB                   │
+├─────────────┼──────────────────────────────────────────────────────────────────┤
+│ Public Key  │ <span class="m">203</span>...C0A                                                        │
+├─────────────┼──────────────────────────────────────────────────────────────────┤
+│ Private Key │ AAA...AAA                                                        │
+└─────────────┴──────────────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">プライベートキーは必ず秘密であることを守ってください。オフラインのどこか安全な場所に秘密鍵がバックアップされていることを確認してください。</p>
+</div>
+</div>
+<div class="section" id="getting-test-currency">
+<span id="setup-getting-test-currency"></span><h2>テスト通貨の取得<a class="headerlink" href="#getting-test-currency" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>トランザクションをアナウンスするには、ネットワークを保護・検証するインフラストラクチャを維持する人々へのインセンティブを提供するための <a class="reference internal" href="../concepts/fees.html"><span class="doc">手数料</span></a> を支払う必要があります。このコストはデフォルトのパブリックネットワークのネットワーク通貨である <code class="docutils literal"><span class="pre">symbol.xym</span></code>  モザイクで支払われます。</p>
+<p>最初のアカウントを作成したので、 <strong>テストネットフォーセット</strong> から|networkcurrency| の取得をリクエストできます。 <a href="http://faucet-951-01.symboldev.network/" target="_blank">Navigate here</a> で受信したい <code class="docutils literal"><span class="pre">symbol.xym</span></code> の量とアドレスを指定して 「<strong>CLAIM!</strong>」 をクリックします。</p>
+<div class="figure align-center">
+<img alt="../_images/faucet.png" src="../_images/faucet.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">デフォルトフォーセットが枯渇している場合は <a href="http://faucet-951-02.symboldev.network/" target="_blank">alternative faucet</a> を試してください。</p>
+</div>
+<p>トランザクションが承認されたら、アカウントが <code class="docutils literal"><span class="pre">symbol.xym</span></code> を受信していることをコマンドラインツールを使用して確認します。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>symbol-cli account info --profile testnet
+
+Balance Information
+┌──────────────────┬─────────────────┬─────────────────┬───────────────────┐
+│ Mosaic Id        │ Relative Amount │ Absolute Amount │ Expiration Height │
+├──────────────────┼─────────────────┼─────────────────┼───────────────────┤
+│ 05D6A80DE3C9ADCA │ <span class="m">750</span>.0           │ <span class="m">750000000</span>       <span class="p">|</span> Never             │
+└──────────────────┴─────────────────┴─────────────────┴───────────────────┘
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">The faucet has a limited amount of <code class="docutils literal"><span class="pre">symbol.xym</span></code> and must be replenished before it dries. If you don’t need your test <code class="docutils literal"><span class="pre">symbol.xym</span></code> units anymore, please send them back to the account <code class="docutils literal"><span class="pre">TA6W43-2Q3NHN-Q5HQSK-Q52XL7-MFJZQI-TJRYBI-LQGG</span></code>.</p>
+</div>
+</div>
+<div class="section" id="creating-a-project">
+<span id="setup-development-environment"></span><h2>プロジェクトの作成<a class="headerlink" href="#creating-a-project" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>アカウントに <code class="docutils literal"><span class="pre">symbol.xym</span></code> 単位が入力されたので <strong>プログラミング言語を選択</strong> しましょう。あなたが一番使いやすいと思う、またはあなたのプロジェクトに必要な言語を選んでください。</p>
+<p>次に、 <strong>新しいプロジェクト用のフォルダを作成します</strong> 。そして、選択した言語による指示に従います。プロジェクトで使用する言語がどれにも当てはまらない場合は  <a class="reference internal" href="../api.html"><span class="doc">REST ゲートウェイ</span></a> を使用して直接ブロックチェーンに問い合わせできます。</p>
+<div class="sphinx-tabs container">
+<div class="ui top attached tabular menu sphinx-menu container">
+<div class="active item sphinx-data-tab-0-0 container">
+<div class="container">
+TypeScript</div>
+</div>
+<div class="item sphinx-data-tab-0-1 container">
+<div class="container">
+JavaScript</div>
+</div>
+<div class="item sphinx-data-tab-0-2 container">
+<div class="container">
+Java</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-0 active container">
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">Symbol SDK は Node.js 12 LTS を実行に必要とします。</p>
+</div>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">package.json</span></code> ファイルを作成します。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm init
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Symbol SDK と RxJS ライブラリのインストール。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm install symbol-sdk@0.19.2 rxjs
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>TypeScript の依存をグローバルにインストールします:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm install --global typescript
+typescript --version
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><a class="reference external" href="https://www.npmjs.com/package/ts-node">ts-node</a> をインストールすると TypeScript ファイルを node で実行できます。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo npm install --global ts-node
+</pre></div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-1 container">
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">Symbol SDK requires Node.js 12 LTS to execute.</p>
+</div>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">package.json</span></code> ファイルを作成します。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm init
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Symbol SDK と RxJS ライブラリのインストール。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm install symbol-sdk@0.19.2 rxjs
+</pre></div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-2 container">
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">Symbol SDK requires JDK 8 to execute.</p>
+</div>
+<ol class="arabic simple">
+<li>新しく Java <a class="reference external" href="https://gradle.org/install/">gradle</a> プロジェクトを開いてください。お好みの IDE を使用するか、コマンドラインからプロジェクトを作成してください。</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>gradle init --type java-application
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Maven セントラルリポジトリを使うため <code class="docutils literal"><span class="pre">build.gradle</span></code> を編集します。</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">repositories</span> <span class="p">{</span>
+    <span class="n">mavenCentral</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><code class="docutils literal"><span class="pre">symbol-sdk</span></code> を依存として追加します。</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">dependencies</span> <span class="p">{</span>
+    <span class="n">compile</span> <span class="s">&quot;io.nem:symbol-sdk-vertx-client:0.19.0&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>プログラムを開始するために <code class="docutils literal"><span class="pre">gradle</span> <span class="pre">build</span></code> と <code class="docutils literal"><span class="pre">gradle</span> <span class="pre">run</span></code> を実行します。</li>
+</ol>
+</div>
+</div>
+<p>次へ: <a class="reference internal" href="first-application.html"><span class="doc">はじめてのアプリケーションを作成</span></a></p>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>お探しのものは見つかりましたか？</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">フィードバックをください。</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/getting-started/setup-workstation.rst" rel="nofollow"> <i class="fab fa-github"></i> このページにを加筆修正する</a>
+</div>
+        <span class="title">このページ</span>
+        <ul>
+<li><a class="reference internal" href="#">ワークステーションのセットアップ</a><ul>
+<li><a class="reference internal" href="#creating-an-account">アカウントの作成</a></li>
+<li><a class="reference internal" href="#getting-test-currency">テスト通貨の取得</a></li>
+<li><a class="reference internal" href="#creating-a-project">プロジェクトの作成</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

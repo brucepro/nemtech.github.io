@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuring network properties &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">Translate</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../../index.html">
+                    
+                    <span><img alt="NEM logo" src="../../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">Mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">Contributors</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="configuring-network-properties">
+<h1>Configuring network properties<a class="headerlink" href="#configuring-network-properties" title="Permalink to this headline">¶</a></h1>
+<p>Customize the network configurable parameters.</p>
+<p>The directory <code class="docutils literal"><span class="pre">ruby/catapult-templates/peer_node/resources</span></code> of the <a href="https://github.com/tech-bureau/catapult-service-bootstrap" target="_blank">Catapult Service Bootstrap</a> repository comes with a set of files to configure the network.</p>
+<p>The <code class="docutils literal"><span class="pre">.properties</span></code> files provided can be edited with any text editor before launching a network for the first time.</p>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>Find below the list of configurable properties.</p>
+<div class="section" id="config-network-properties">
+<span id="id1"></span><h3>config-network.properties<a class="headerlink" href="#config-network-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Default MIJIN_TEST</th>
+<th class="head">Default TEST_NET</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>network</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>identifier</td>
+<td>NetworkIdentifier</td>
+<td>Network identifier.</td>
+<td>mijin-test</td>
+<td>public-test</td>
+</tr>
+<tr class="row-even"><td>nodeEqualityStrategy</td>
+<td>NodeIdentityEqualityStrategy</td>
+<td>Node equality strategy.</td>
+<td>host</td>
+<td>host</td>
+</tr>
+<tr class="row-odd"><td>publicKey</td>
+<td>Key</td>
+<td>Nemesis public key.</td>
+<td>B4F12E7C9F6946091E2CB8B6D3A12B50D17CCBBF646386EA27CE2946A7423DCF</td>
+<td>392FF0ABA6C4BE82C0D1C4C7E399D396A0F51AD8E3EF1FC28070249C1D8D812E</td>
+</tr>
+<tr class="row-even"><td>generationHash</td>
+<td>catapult::GenerationHash</td>
+<td>Nemesis generation hash.</td>
+<td>57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6</td>
+<td>4009619EB7A9F824C5D0EE0E164E0F99CCD7906A475D7768FD60B452204BD0A2</td>
+</tr>
+<tr class="row-odd"><td>epochAdjustment</td>
+<td>utils::TimeSpan</td>
+<td>Nemesis epoch time adjustment.</td>
+<td>1573430400s</td>
+<td>1573430400s</td>
+</tr>
+<tr class="row-even"><td><strong>chain</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>enableVerifiableState</td>
+<td>bool</td>
+<td>Set to true if block chain should calculate state hashes so that state is fully verifiable at each block.</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>enableVerifiableReceipts</td>
+<td>bool</td>
+<td>Set to true if block chain should calculate receipts so that state changes are fully verifiable at each block.</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr class="row-odd"><td>currencyMosaicId</td>
+<td>MosaicId</td>
+<td>Mosaic id used as primary chain currency.</td>
+<td>0x0DC6‘7FBE‘1CAD‘29E3</td>
+<td>0x05D6’A80D’E3C9’ADCA</td>
+</tr>
+<tr class="row-even"><td>harvestingMosaicId</td>
+<td>MosaicId</td>
+<td>Mosaic id used to provide harvesting ability.</td>
+<td>0x2651‘4E2A‘1EF3‘3824</td>
+<td>0x05D6’A80D’E3C9’ADCA</td>
+</tr>
+<tr class="row-odd"><td>blockGenerationTargetTime</td>
+<td>utils::TimeSpan</td>
+<td>Targeted time between blocks.</td>
+<td>30s</td>
+<td>15s</td>
+</tr>
+<tr class="row-even"><td>blockTimeSmoothingFactor</td>
+<td>uint32_t</td>
+<td><em>Note</em>: A higher value makes the network more biased. <em>Note</em>: This can lower security because it will increase the influence of time relative to importance.</td>
+<td>3000</td>
+<td>3000</td>
+</tr>
+<tr class="row-odd"><td>blockFinalizationInterval</td>
+<td>uint32_t</td>
+<td>Number of blocks between successive finalization attempts.</td>
+<td>30</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>importanceGrouping</td>
+<td>uint64_t</td>
+<td>Number of blocks that should be treated as a group for importance purposes. <em>Note</em>: Importances will only be calculated at blocks that are multiples of this grouping number.</td>
+<td>39</td>
+<td>1433</td>
+</tr>
+<tr class="row-odd"><td>importanceActivityPercentage</td>
+<td>uint8_t</td>
+<td>Percentage of importance resulting from fee generation and beneficiary usage.</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>maxRollbackBlocks</td>
+<td>uint32_t</td>
+<td>Maximum number of blocks that can be rolled back.</td>
+<td>40</td>
+<td>398</td>
+</tr>
+<tr class="row-odd"><td>maxDifficultyBlocks</td>
+<td>uint32_t</td>
+<td>Maximum number of blocks to use in a difficulty calculation.</td>
+<td>60</td>
+<td>60</td>
+</tr>
+<tr class="row-even"><td>defaultDynamicFeeMultiplier</td>
+<td>BlockFeeMultiplier</td>
+<td>Default multiplier to use for dynamic fees.</td>
+<td>10‘000</td>
+<td>1‘000</td>
+</tr>
+<tr class="row-odd"><td>maxTransactionLifetime</td>
+<td>utils::TimeSpan</td>
+<td>Maximum lifetime a transaction can have before it expires.</td>
+<td>24h</td>
+<td>24h</td>
+</tr>
+<tr class="row-even"><td>maxBlockFutureTime</td>
+<td>utils::TimeSpan</td>
+<td>Maximum future time of a block that can be accepted.</td>
+<td>500ms</td>
+<td>500ms</td>
+</tr>
+<tr class="row-odd"><td>initialCurrencyAtomicUnits</td>
+<td>Amount</td>
+<td>Initial currency atomic units available in the network.</td>
+<td>8‘998‘999‘998‘000‘000</td>
+<td>7‘831‘975‘436‘000‘000</td>
+</tr>
+<tr class="row-even"><td>maxMosaicAtomicUnits</td>
+<td>Amount</td>
+<td>Maximum atomic units (total-supply * 10 ^ divisibility) of a mosaic allowed in the network.</td>
+<td>9‘000‘000‘000‘000‘000</td>
+<td>9‘000‘000‘000‘000‘000</td>
+</tr>
+<tr class="row-odd"><td>totalChainImportance</td>
+<td>Importance</td>
+<td>Total whole importance units available in the network.</td>
+<td>15‘000‘000</td>
+<td>7‘831‘975‘436‘000‘000</td>
+</tr>
+<tr class="row-even"><td>minHarvesterBalance</td>
+<td>Amount</td>
+<td>Minimum number of harvesting mosaic atomic units needed for an account to be eligible for harvesting.</td>
+<td>500</td>
+<td>10‘000‘000‘000</td>
+</tr>
+<tr class="row-odd"><td>maxHarvesterBalance</td>
+<td>Amount</td>
+<td>Maximum number of harvesting mosaic atomic units needed for an account to be eligible for harvesting.</td>
+<td>4‘000‘000</td>
+<td>50‘000‘000‘000‘000</td>
+</tr>
+<tr class="row-even"><td>minVoterBalance</td>
+<td>Amount</td>
+<td>Minimum number of harvesting mosaic atomic units needed for an account to be eligible for voting.</td>
+<td>50‘000</td>
+<td>50‘000</td>
+</tr>
+<tr class="row-odd"><td>harvestBeneficiaryPercentage</td>
+<td>uint8_t</td>
+<td>Percentage of the harvested fee that is collected by the beneficiary account.</td>
+<td>10</td>
+<td>25</td>
+</tr>
+<tr class="row-even"><td>harvestNetworkPercentage</td>
+<td>uint8_t</td>
+<td>Percentage of the harvested fee that is collected by the network.</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>harvestNetworkFeeSinkPublicKey</td>
+<td>Key</td>
+<td>Public key of the harvest network fee sink account.</td>
+<td>FF5563F1C5824EE0CD868799FBE8744B46D5549973FDA499939C952D951494E4</td>
+<td>FF5563F1C5824EE0CD868799FBE8744B46D5549973FDA499939C952D951494E4</td>
+</tr>
+<tr class="row-even"><td>blockPruneInterval</td>
+<td>uint32_t</td>
+<td>Number of blocks between cache pruning.</td>
+<td>360</td>
+<td>360</td>
+</tr>
+<tr class="row-odd"><td>maxTransactionsPerBlock</td>
+<td>uint32_t</td>
+<td>Maximum number of transactions per block.</td>
+<td>200‘000</td>
+<td>1‘500</td>
+</tr>
+<tr class="row-even"><td><strong>plugin:catapult.plugins.accountlink</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>dummy</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>to trigger plugin load</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>plugin:catapult.plugins.aggregate</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>maxTransactionsPerAggregate</td>
+<td>uint32_t</td>
+<td>Maximum number of transactions per aggregate.</td>
+<td>1‘000</td>
+<td>1‘000</td>
+</tr>
+<tr class="row-even"><td>maxCosignaturesPerAggregate</td>
+<td>uint8_t</td>
+<td>Maximum number of cosignatures per aggregate.</td>
+<td>15</td>
+<td>25</td>
+</tr>
+<tr class="row-odd"><td>enableStrictCosignatureCheck</td>
+<td>bool</td>
+<td>Set to true if cosignatures must exactly match component signers. Set to false if cosignatures should be validated externally.</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr class="row-even"><td>enableBondedAggregateSupport</td>
+<td>bool</td>
+<td>Set to true if bonded aggregates should be allowed. Set to false if bonded aggregates should be rejected.</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr class="row-odd"><td>maxBondedTransactionLifetime</td>
+<td>utils::TimeSpan</td>
+<td>Maximum lifetime a bonded transaction can have before it expires.</td>
+<td>48h</td>
+<td>48h</td>
+</tr>
+<tr class="row-even"><td><strong>plugin:catapult.plugins.lockhash</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>lockedFundsPerAggregate</td>
+<td>Amount</td>
+<td>Amount that has to be locked per aggregate in partial cache.</td>
+<td>10‘000‘000</td>
+<td>10‘000‘000</td>
+</tr>
+<tr class="row-even"><td>maxHashLockDuration</td>
+<td>utils::BlockSpan</td>
+<td>Maximum number of blocks for which a hash lock can exist.</td>
+<td>2d</td>
+<td>2d</td>
+</tr>
+<tr class="row-odd"><td><strong>plugin:catapult.plugins.locksecret</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>maxSecretLockDuration</td>
+<td>utils::BlockSpan</td>
+<td>Maximum number of blocks for which a secret lock can exist.</td>
+<td>30d</td>
+<td>30d</td>
+</tr>
+<tr class="row-odd"><td>minProofSize</td>
+<td>uint16_t</td>
+<td>Minimum size of a proof in bytes.</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>maxProofSize</td>
+<td>uint16_t</td>
+<td>Maximum size of a proof in bytes.</td>
+<td>1000</td>
+<td>1000</td>
+</tr>
+<tr class="row-odd"><td><strong>plugin:catapult.plugins.metadata</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>maxValueSize</td>
+<td>uint16_t</td>
+<td>Maximum metadata value size.</td>
+<td>1024</td>
+<td>1024</td>
+</tr>
+<tr class="row-odd"><td><strong>plugin:catapult.plugins.mosaic</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>maxMosaicsPerAccount</td>
+<td>uint16_t</td>
+<td>Maximum number of mosaics that an account can own.</td>
+<td>10‘000</td>
+<td>1‘000</td>
+</tr>
+<tr class="row-odd"><td>maxMosaicDuration</td>
+<td>utils::BlockSpan</td>
+<td>Maximum mosaic duration.</td>
+<td>3650d</td>
+<td>3650d</td>
+</tr>
+<tr class="row-even"><td>maxMosaicDivisibility</td>
+<td>uint8_t</td>
+<td>Maximum mosaic divisibility.</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>mosaicRentalFeeSinkPublicKey</td>
+<td>Key</td>
+<td>Public key of the mosaic rental fee sink account.</td>
+<td>53E140B5947F104CABC2D6FE8BAEDBC30EF9A0609C717D9613DE593EC2A266D3</td>
+<td>53E140B5947F104CABC2D6FE8BAEDBC30EF9A0609C717D9613DE593EC2A266D3</td>
+</tr>
+<tr class="row-even"><td>mosaicRentalFee</td>
+<td>Amount</td>
+<td>Mosaic rental fee.</td>
+<td>500</td>
+<td>500</td>
+</tr>
+<tr class="row-odd"><td><strong>plugin:catapult.plugins.multisig</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>maxMultisigDepth</td>
+<td>uint8_t</td>
+<td>Maximum number of multisig levels.</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>maxCosignatoriesPerAccount</td>
+<td>uint32_t</td>
+<td>Maximum number of cosignatories per account.</td>
+<td>10</td>
+<td>25</td>
+</tr>
+<tr class="row-even"><td>maxCosignedAccountsPerAccount</td>
+<td>uint32_t</td>
+<td>Maximum number of accounts a single account can cosign.</td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr class="row-odd"><td><strong>plugin:catapult.plugins.namespace</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>maxNameSize</td>
+<td>uint8_t</td>
+<td>Maximum namespace name size.</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr class="row-odd"><td>maxChildNamespaces</td>
+<td>uint16_t</td>
+<td>Maximum number of children for a root namespace.</td>
+<td>500</td>
+<td>256</td>
+</tr>
+<tr class="row-even"><td>maxNamespaceDepth</td>
+<td>uint8_t</td>
+<td>Maximum namespace depth.</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>minNamespaceDuration</td>
+<td>utils::BlockSpan</td>
+<td>Minimum namespace duration.</td>
+<td>1m</td>
+<td>30d</td>
+</tr>
+<tr class="row-even"><td>maxNamespaceDuration</td>
+<td>utils::BlockSpan</td>
+<td>Maximum namespace duration.</td>
+<td>365d</td>
+<td>365d</td>
+</tr>
+<tr class="row-odd"><td>namespaceGracePeriodDuration</td>
+<td>utils::BlockSpan</td>
+<td>Grace period during which time only the previous owner can renew an expired namespace.</td>
+<td>2m</td>
+<td>30d</td>
+</tr>
+<tr class="row-even"><td>reservedRootNamespaceNames</td>
+<td>unordered_set&lt;string&gt;</td>
+<td>Reserved root namespaces that cannot be claimed.</td>
+<td>xem, nem, user, account, org, com, biz, net, edu, mil, gov, info</td>
+<td>symbol, symbl, xym, xem, nem, user, account, org, com, biz, net, edu, mil, gov, info</td>
+</tr>
+<tr class="row-odd"><td>namespaceRentalFeeSinkPublicKey</td>
+<td>Key</td>
+<td>Public key of the namespace rental fee sink account.</td>
+<td>3E82E1C1E4A75ADAA3CBA8C101C3CD31D9817A2EB966EB3B511FB2ED45B8E262</td>
+<td>3E82E1C1E4A75ADAA3CBA8C101C3CD31D9817A2EB966EB3B511FB2ED45B8E262</td>
+</tr>
+<tr class="row-even"><td>rootNamespaceRentalFeePerBlock</td>
+<td>Amount</td>
+<td>Root namespace rental fee per block.</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>childNamespaceRentalFee</td>
+<td>Amount</td>
+<td>Child namespace rental fee.</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr class="row-even"><td><strong>plugin:catapult.plugins.restrictionaccount</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>maxAccountRestrictionValues</td>
+<td>uint16_t</td>
+<td>Maximum number of account restriction values.</td>
+<td>512</td>
+<td>512</td>
+</tr>
+<tr class="row-even"><td><strong>plugin:catapult.plugins.restrictionmosaic</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>maxMosaicRestrictionValues</td>
+<td>uint8_t</td>
+<td>Maximum number of mosaic restriction values.</td>
+<td>20</td>
+<td>20</td>
+</tr>
+<tr class="row-even"><td><strong>plugin:catapult.plugins.transfer</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>maxMessageSize</td>
+<td>uint16_t</td>
+<td>Maximum transaction message size.</td>
+<td>1024</td>
+<td>1024</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="config-inflation-properties">
+<h3>config-inflation.properties<a class="headerlink" href="#config-inflation-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Default MIJIN_TEST</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>inflation</strong></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>starting-at-height-1</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>100</td>
+</tr>
+<tr class="row-even"><td>starting-at-height-10000</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>Did you find what you were looking for?</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">Give us your feedback.</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/guides/network/configuring-network-properties.rst" rel="nofollow"> <i class="fab fa-github"></i> Improve this page</a>
+</div>
+        <span class="title">On this page</span>
+        <ul>
+<li><a class="reference internal" href="#">Configuring network properties</a><ul>
+<li><a class="reference internal" href="#properties">Properties</a><ul>
+<li><a class="reference internal" href="#config-network-properties">config-network.properties</a></li>
+<li><a class="reference internal" href="#config-inflation-properties">config-inflation.properties</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>コンセンサス &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/examplecode.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon-32x32.png"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="ハーベスティング" href="harvesting.html" />
+    <link rel="prev" title="データバリデーション" href="data-validation.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">翻訳する</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../index.html">
+                    
+                    <span><img alt="NEM logo" src="../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">ナビゲーション <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">入門</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/setup-workstation.html">ワークステーションのセットアップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/creating-a-private-test-net.html">プライベートテストネットの作成</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">コンセンサス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#factors">要因</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scores">スコア</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">制約</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculation">算出</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributors.html">貢献者</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">入門</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/setup-workstation.html">ワークステーションのセットアップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/creating-a-private-test-net.html">プライベートテストネットの作成</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">コンセンサス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#factors">要因</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scores">スコア</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">制約</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculation">算出</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributors.html">貢献者</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="consensus">
+<h1>コンセンサス<a class="headerlink" href="#consensus" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Symbol は Proof of Stake Plus (<strong>PoS+</strong>) と命名された Proof of Stake を修正したコンセンサスアルゴリズムを使用しています。</p>
+<p>基本の Proof of Stake (<a href="https://en.wikipedia.org/wiki/Proof_of_stake" target="_blank">PoS</a>) コンセンサスアルゴリズムでは、ブロックチェーン内における後続ブロック形成は、関係者の資産に関連する要因の組み合わせによって重み付けされた、ブロックチェーンのコイン保有ステークホルダーへ確率的に割り当てられます。</p>
+<p>改良したプロトコルはネットワークへのアカウントのステークを考慮し、それらの活動に基づき積極的な支持者に報酬を与え、富ある者がより豊かになる問題を軽減します。</p>
+<div class="section" id="factors">
+<span id="importance-calculation"></span><h2>要因<a class="headerlink" href="#factors" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このアルゴリズムはエコシステム健全性の観点を改善するために以下の要因を考慮します:</p>
+<ul class="simple">
+<li><strong>Stake</strong>: 保有している <a class="reference internal" href="harvesting.html#harvesting-mosaic"><span class="std std-ref">ハーベスティングモザイク</span></a> の総量。より大きい残高の保有者はエコシステムが繁栄するのを見るためにインセンティブを持つべきです。</li>
+<li><strong>Transactions</strong>: アカウントが支払った手数料の合計量。ネットワーク上でアクティブなアカウントになることを推奨します。</li>
+<li><strong>Nodes</strong>: アカウントがブロックの受益者である回数。ネットワークを安全に保つため、ネットワークはノードを実行しているアクティブなアカウントへインセンティブを与えるべきです。</li>
+</ul>
+<p>すべての高価値アカウントはこれら 3 つの要素に基づいて <strong>インポータンススコア</strong> を受け取り、それがブロックを <a class="reference internal" href="harvesting.html"><span class="doc">ハーベスト</span></a> する確率を決定します。</p>
+</div>
+<div class="section" id="scores">
+<h2>スコア<a class="headerlink" href="#scores" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ネットワークは各要因をすべての高価値アカウントに対して以下のサブスコアを計算します:</p>
+<ul class="simple">
+<li><strong>Stake Score (S`)</strong>: 時間 P におけるすべての高価値アカウントの実効残高の割合</li>
+<li><strong>Transaction Score (T`)</strong>: 期間 P-1 から P までのすべての高価値アカウントにおける合計トランザクション手数料の割合</li>
+<li><strong>Node Score (N`)</strong>: P-1 から P までの全ブロックにおける受益者合計の割合</li>
+</ul>
+</div>
+<div class="section" id="constants">
+<h2>制約<a class="headerlink" href="#constants" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>各ネットワークはカスタムコンセンサスアルゴリズム <a class="reference internal" href="../guides/network/configuring-network-properties.html#config-network-properties"><span class="std std-ref">定数</span></a> を定義できます。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="30%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">制約</th>
+<th class="head">値</th>
+<th class="head">説明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>a</td>
+<td>0.05</td>
+<td>活動スコアのネットワーク全体の貢献</td>
+</tr>
+<tr class="row-odd"><td>p</td>
+<td>10000</td>
+<td>活動スコアから段階的にフェーズアウトを調整するための定数</td>
+</tr>
+<tr class="row-even"><td>t</td>
+<td>0.8</td>
+<td>トランザクションスコア乗数</td>
+</tr>
+<tr class="row-odd"><td>n</td>
+<td>0.2</td>
+<td>ノードスコア乗数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculation">
+<h2>算出<a class="headerlink" href="#calculation" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>インポータンスはアカウントごとに次の方法で計算できます:</p>
+<div class="math">
+\[(1 - a) * (S') + a * || p / (S') * (t * (T') + n * (N')) ||\]</div>
+<p>トランザクションスコアとノードスコアの組み合わせはステークスコアが低い場合に乗数効果があります。逆に、ステークスコアが高い場合に乗数効果は重要ではありません。</p>
+<p>次項: <a class="reference internal" href="harvesting.html"><span class="doc">ハーベスティング</span></a></p>
+</div>
+</div>
+
+  <div class="section">
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>お探しのものは見つかりましたか？</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">フィードバックをください。</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/concepts/consensus-algorithm.rst" rel="nofollow"> <i class="fab fa-github"></i> このページにを加筆修正する</a>
+</div>
+        <span class="title">このページ</span>
+        <ul>
+<li><a class="reference internal" href="#">コンセンサス</a><ul>
+<li><a class="reference internal" href="#factors">要因</a></li>
+<li><a class="reference internal" href="#scores">スコア</a></li>
+<li><a class="reference internal" href="#constants">制約</a></li>
+<li><a class="reference internal" href="#calculation">算出</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

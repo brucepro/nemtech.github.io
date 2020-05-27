@@ -1,0 +1,764 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>パブリックとプライベート間のアトミッククロスチェイン交換 &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-32x32.png"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">翻訳する</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../../index.html">
+                    
+                    <span><img alt="NEM logo" src="../../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">ナビゲーション <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">入門</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">ワークステーションのセットアップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/creating-a-private-test-net.html">プライベートテストネットの作成</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">コンセンサス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">貢献者</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">入門</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/setup-workstation.html">ワークステーションのセットアップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/first-application.html">はじめてのアプリケーションを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migrating-from-nem-to-symbol.html">NEM から Symbol へのマイグレーション</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/creating-an-account.html">アカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer/sending-a-transfer-transaction.html">モザイクとメッセージを２つのアカウント間で送信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mosaic/creating-a-mosaic.html">モザイクの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multisig/creating-a-multisig-account.html">マルチシグアカウントの作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/running-a-test-net-node.html">テストネットノードの立ち上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../network/creating-a-private-test-net.html">プライベートテストネットの作成</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account.html">アカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic.html">モザイク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/namespace.html">ネームスペース</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/metadata.html">メタデータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transfer-transaction.html">転送トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/aggregate-transaction.html">アグリゲートトランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/account-restriction.html">アカウント制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/mosaic-restriction.html">モザイク制限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/multisig-account.html">マルチシグアカウント</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cross-chain-swaps.html">クロスチェーンスワップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/plugin.html">Symbol の拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cryptography.html">暗号理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/block.html">ブロック</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/transaction.html">トランザクション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/fees.html">手数料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/receipt.html">レシート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/data-validation.html">データバリデーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/consensus-algorithm.html">コンセンサス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/harvesting.html">ハーベスティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/inflation.html">インフレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/node.html">ノード</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">REST ゲートウェイ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">サーバ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wallets.html">ウォレット</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/community.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributing.html">ガイドライン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/contributors.html">貢献者</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="atomic-cross-chain-swap-between-public-and-private-chain">
+<h1>パブリックとプライベート間のアトミッククロスチェイン交換<a class="headerlink" href="#atomic-cross-chain-swap-between-public-and-private-chain" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>第三者の仲介者が入ることなく、異なるブロックチェーン間でトークンの交換をします。</p>
+<div class="section" id="background">
+<h2>背景<a class="headerlink" href="#background" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Alice と Bob は <strong>10 alice:tokens を 10 bob:tokens</strong> に交換したいと思っています。課題は彼らが同じブロックチェーン上に存在していないことです: alice:token は Symbol  のパブリックチェーン上に、一方で bob:token は Symbol テクノロジーによるプライベートネットワーク上に定義されています。</p>
+<p>非アトミックな解決方法の場合:</p>
+<ol class="arabic simple">
+<li>Alice が 10 alice:tokens を Bob へ送信する (プライベートチェーン)</li>
+<li>Bob はトランザクションを受信する</li>
+<li>Bob が 10 bob:tokens を Alice へ送信する (パブリックチェーン)</li>
+<li>Alice はトランザクションを受信する</li>
+</ol>
+<p>しかし、彼らはそれほどお互いを信頼しあってはいません。お気づきでしょうが、 Bob は 3 を実行しない場合に Alice’s のトークンを保持できます。</p>
+<p>このガイドでは、さまざまな参加者とネットワーク間でトークンを安全に交換する定義をする方法を示します。</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>前提条件<a class="headerlink" href="#prerequisites" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../../getting-started/setup-workstation.html"><span class="doc">入門セクション</span></a> を完了している</li>
+<li>スワップに関与するすべての参加者は、各ブロックチェーンで少なくとも 1 つのアカウントを所有している必要があります。</li>
+</ul>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id1" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">alicePublicChainAccount</span> <span class="o">=</span> <span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">alicePrivateChainAccount</span> <span class="o">=</span> <span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">bobPublicChainAccount</span> <span class="o">=</span> <span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">bobPrivateChainAccount</span> <span class="o">=</span> <span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">privateChainTransactionHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TransactionHttp</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">publicChainTransactionHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TransactionHttp</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">publicChainGenerationHash</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NETWORK_GENERATION_HASH</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">privateChainGenerationHash</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NETWORK_GENERATION_HASH</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id2" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">alicePublicChainAccount</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">alicePrivateChainAccount</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">bobPublicChainAccount</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">bobPrivateChainAccount</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Account</span><span class="p">.</span><span class="nx">createFromPrivateKey</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">privateChainTransactionHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">TransactionHttp</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">publicChainTransactionHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">TransactionHttp</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">publicChainGenerationHash</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NETWORK_GENERATION_HASH</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">privateChainGenerationHash</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NETWORK_GENERATION_HASH</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li>Alice のアカウントはパブリックチェーン上で最低でも 10 alice.tokens を保有している必要があります。</li>
+<li>Bob のアカウントはパブリックチェーン上で最低でも 10 bob.tokens を保有している必要があります。</li>
+<li>両方のアカウントは手数料を支払うために十分な手数料が必要です。</li>
+</ul>
+</div>
+<div class="section" id="method-01-using-the-sdk">
+<h2>方法 #01: SDK を使用する<a class="headerlink" href="#method-01-using-the-sdk" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>1. Alice generates a random set of bytes called <code class="docutils literal"><span class="pre">proof</span></code>. The proof should have a size between <code class="docutils literal"><span class="pre">10</span></code> and <code class="docutils literal"><span class="pre">1000</span></code> bytes.
+Then, applies a <strong>SHA3-256</strong> algorithm to it, obtaining the <code class="docutils literal"><span class="pre">secret</span></code>.</p>
+<ol class="arabic simple" start="2">
+<li>Alice は得られた proof を <a class="reference internal" href="../../concepts/cross-chain-swaps.html#lock-hash-algorithm"><span class="std std-ref">利用可能なアルゴリズム</span></a> の1つでハッシュ化して <code class="docutils literal"><span class="pre">secret</span></code> を生成します。</li>
+</ol>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id3" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">random</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">proof</span> <span class="o">=</span> <span class="nx">random</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Proof:&#39;</span><span class="p">,</span> <span class="nx">proof</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">sha3_256</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">secret</span> <span class="o">=</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">random</span><span class="p">).</span><span class="nx">hex</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Secret:&#39;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id4" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">random</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">proof</span> <span class="o">=</span> <span class="nx">random</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Proof:&#39;</span><span class="p">,</span> <span class="nx">proof</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">js_sha3_1</span><span class="p">.</span><span class="nx">sha3_256</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">secret</span> <span class="o">=</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">random</span><span class="p">).</span><span class="nx">hex</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Secret:&#39;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Alice は <a class="reference internal" href="../../concepts/cross-chain-swaps.html#secret-lock-transaction"><span class="std std-ref">SecretLockTransaction</span></a> <strong>TX1</strong> を定義します:</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">TX1 Property</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>SecretLockTransaction</td>
+</tr>
+<tr class="row-odd"><td>Mosaic</td>
+<td>10 <code class="docutils literal"><span class="pre">00D3378709746FC4</span></code> (alice token)</td>
+</tr>
+<tr class="row-even"><td>Recipient</td>
+<td>Bob のアドレス (プライベートチェーン)</td>
+</tr>
+<tr class="row-odd"><td>Algorithm</td>
+<td>SHA3-256</td>
+</tr>
+<tr class="row-even"><td>Duration</td>
+<td>96 h</td>
+</tr>
+<tr class="row-odd"><td>Secret</td>
+<td>SHA3-256(proof)</td>
+</tr>
+<tr class="row-even"><td>Network</td>
+<td>Private Chain</td>
+</tr>
+</tbody>
+</table>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id5" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx1</span> <span class="o">=</span> <span class="nx">SecretLockTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="k">new</span> <span class="nx">Mosaic</span><span class="p">(</span><span class="k">new</span> <span class="nx">MosaicId</span><span class="p">(</span><span class="s1">&#39;00D3378709746FC4&#39;</span><span class="p">),</span> <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+    <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">96</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="c1">// assuming one block every 15 seconds</span>
+    <span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span>
+    <span class="nx">secret</span><span class="p">,</span>
+    <span class="nx">bobPrivateChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+    <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id6" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx1</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">SecretLockTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Mosaic</span><span class="p">(</span><span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">MosaicId</span><span class="p">(</span><span class="s1">&#39;00D3378709746FC4&#39;</span><span class="p">),</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">96</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="c1">// assuming one block every 15 seconds</span>
+<span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">bobPrivateChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>度アナウンスされると、誰かがシークレットにマッチする証明を発見するまで、このトランザクションはロックされたままです。もしセットされた期限よりも前に、誰もアンロックしない場合は、ロックされた資産は Alice へ返還されます。</p>
+<ol class="arabic simple" start="4">
+<li>Alice は <strong>TX1 をプライベートネットワークへアナウンス</strong> し <strong>Bob とシークレットを共有</strong> します。</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">Bob はチェーンからシークレットを取得する必要があります。シークレットの正当性を検証するのは Bob の責任です。</p>
+</div>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id7" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx1Signed</span> <span class="o">=</span> <span class="nx">alicePrivateChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx1</span><span class="p">,</span> <span class="nx">privateChainGenerationHash</span><span class="p">);</span>
+<span class="nx">privateChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx1Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id8" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx1Signed</span> <span class="o">=</span> <span class="nx">alicePrivateChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx1</span><span class="p">,</span> <span class="nx">privateChainGenerationHash</span><span class="p">);</span>
+<span class="nx">privateChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx1Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="5">
+<li>Bob は以下の <strong>SecretLockTransaction TX2</strong> を <strong>パブリックネットワーク</strong> へアナウンスします</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">TX2 Property</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>SecretLockTransaction</td>
+</tr>
+<tr class="row-odd"><td>Mosaic</td>
+<td>10 <code class="docutils literal"><span class="pre">10293DE77C684F71</span></code> (bob token)</td>
+</tr>
+<tr class="row-even"><td>Recipient</td>
+<td>Alice のアドレス (パブリックチェーン)</td>
+</tr>
+<tr class="row-odd"><td>Algorithm</td>
+<td>SHA3-256</td>
+</tr>
+<tr class="row-even"><td>Duration</td>
+<td>84 h</td>
+</tr>
+<tr class="row-odd"><td>Secret</td>
+<td>SHA3-256(proof)</td>
+</tr>
+<tr class="row-even"><td>Network</td>
+<td>Public Chain</td>
+</tr>
+</tbody>
+</table>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id9" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx2</span> <span class="o">=</span> <span class="nx">SecretLockTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="k">new</span> <span class="nx">Mosaic</span><span class="p">(</span><span class="k">new</span> <span class="nx">MosaicId</span><span class="p">(</span><span class="s1">&#39;10293DE77C684F71&#39;</span><span class="p">),</span> <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+    <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">84</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="c1">// assuming one block every 15 seconds</span>
+    <span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span>
+    <span class="nx">secret</span><span class="p">,</span>
+    <span class="nx">alicePublicChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+    <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">,</span>
+    <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">2000000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id10" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx2</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">SecretLockTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Mosaic</span><span class="p">(</span><span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">MosaicId</span><span class="p">(</span><span class="s1">&#39;10293DE77C684F71&#39;</span><span class="p">),</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">84</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="c1">// assuming one block every 15 seconds</span>
+<span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">alicePublicChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">2000000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">資産をアンロックできる時間は、TX1 のタイムフレームよりも短くする必要があります。Alice はシークレットを知っていて、Bob はそれを確信しているので、Alice がシークレットを公開した後に、彼にはいくぶんかの時間があるでしょう。</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">TX1 が <a class="reference internal" href="../../concepts/block.html#rollbacks"><span class="std std-ref">ロールバック</span></a> しないことを保証するために、Bob は TX2 をアナウンスする前に、 TX1 の少なくとも <code class="docutils literal"><span class="pre">maxRollBackBlocks</span></code> 承認まで待つ必要があります。</p>
+</div>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id11">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id11" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx2Signed</span> <span class="o">=</span> <span class="nx">bobPublicChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx2</span><span class="p">,</span> <span class="nx">publicChainGenerationHash</span><span class="p">);</span>
+<span class="nx">publicChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx2Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id12">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id12" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx2Signed</span> <span class="o">=</span> <span class="nx">bobPublicChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx2</span><span class="p">,</span> <span class="nx">publicChainGenerationHash</span><span class="p">);</span>
+<span class="nx">publicChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx2Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="6">
+<li>Alice は <a class="reference internal" href="../../concepts/cross-chain-swaps.html#secret-proof-transaction"><span class="std std-ref">SecretProofTransaction</span></a> <strong>TX3</strong> を <strong>パブリックネットワーク</strong> へアナウンスします。このトランザクションは使用している暗号化アルゴリズム、オリジナルの証明とシークレットを定義します。</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">TX3 Property</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>SecretProofTransaction</td>
+</tr>
+<tr class="row-odd"><td>Recipient</td>
+<td>Alice のアドレス (パブリックチェーン)</td>
+</tr>
+<tr class="row-even"><td>Algorithm</td>
+<td>SHA3-256</td>
+</tr>
+<tr class="row-odd"><td>Secret</td>
+<td>SHA3-256(proof)</td>
+</tr>
+<tr class="row-even"><td>Proof</td>
+<td>proof</td>
+</tr>
+<tr class="row-odd"><td>Network</td>
+<td>Public Chain</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">TX2 が <a class="reference internal" href="../../concepts/block.html#rollbacks"><span class="std std-ref">ロールバック</span></a> しないことを保証するために、Bob は TX3 をアナウンスする前に、 TX2 の少なくとも <code class="docutils literal"><span class="pre">maxRollBackBlocks</span></code> 承認まで待つ必要があります。</p>
+</div>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id13">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id13" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx3</span> <span class="o">=</span> <span class="nx">SecretProofTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span>
+    <span class="nx">secret</span><span class="p">,</span>
+    <span class="nx">alicePublicChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+    <span class="nx">proof</span><span class="p">,</span>
+    <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">,</span>
+    <span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">2000000</span><span class="p">));</span>
+
+<span class="kr">const</span> <span class="nx">tx3Signed</span> <span class="o">=</span> <span class="nx">alicePublicChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx3</span><span class="p">,</span> <span class="nx">publicChainGenerationHash</span><span class="p">);</span>
+<span class="nx">publicChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx3Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id14">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id14" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx3</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">SecretProofTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">alicePublicChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span> <span class="nx">proof</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MAIN_NET</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">UInt64</span><span class="p">.</span><span class="nx">fromUint</span><span class="p">(</span><span class="mi">2000000</span><span class="p">));</span>
+<span class="kr">const</span> <span class="nx">tx3Signed</span> <span class="o">=</span> <span class="nx">alicePublicChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx3</span><span class="p">,</span> <span class="nx">publicChainGenerationHash</span><span class="p">);</span>
+<span class="nx">publicChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx3Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="7">
+<li>TX3 が承認されると <strong>proof</strong> が明かされます。<strong>TX2 トランザクションはアンロック</strong> されて Alice はロックされた資産を受け取ります。</li>
+<li>Bob は proof を手に入れて <strong>SecretProofTransaction TX4</strong> を <strong>プライベートネットワーク</strong> へアナウンスし、ロックされた資産を <strong>TX1</strong> から受け取ります。</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">TX3 が <a class="reference internal" href="../../concepts/block.html#rollbacks"><span class="std std-ref">ロールバック</span></a> しないことを保証するために、Bob は TX4 をアナウンスする前に、 TX3 の少なくとも <code class="docutils literal"><span class="pre">maxRollBackBlocks</span></code> 承認まで待つ必要があります。</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">TX4 Property</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>SecretProofTransaction</td>
+</tr>
+<tr class="row-odd"><td>Recipient</td>
+<td>Bob のアドレス (プライベートチェーン)</td>
+</tr>
+<tr class="row-even"><td>Algorithm</td>
+<td>SHA3-256</td>
+</tr>
+<tr class="row-odd"><td>Secret</td>
+<td>SHA3-256(proof)</td>
+</tr>
+<tr class="row-even"><td>Proof</td>
+<td>proof</td>
+</tr>
+<tr class="row-odd"><td>Network</td>
+<td>Private Chain</td>
+</tr>
+</tbody>
+</table>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id15">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.ts">View Code</a></span><a class="headerlink" href="#id15" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx4</span> <span class="o">=</span> <span class="nx">SecretProofTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span>
+    <span class="nx">secret</span><span class="p">,</span>
+    <span class="nx">bobPrivateChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+    <span class="nx">proof</span><span class="p">,</span>
+    <span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">tx4Signed</span> <span class="o">=</span> <span class="nx">bobPrivateChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx4</span><span class="p">,</span> <span class="nx">privateChainGenerationHash</span><span class="p">);</span>
+<span class="nx">privateChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx4Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id16">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/secretlock/CrossChainSwap.js">View Code</a></span><a class="headerlink" href="#id16" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">tx4</span> <span class="o">=</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">SecretProofTransaction</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">.</span><span class="nx">create</span><span class="p">(),</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">LockHashAlgorithm</span><span class="p">.</span><span class="nx">Op_Sha3_256</span><span class="p">,</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">bobPrivateChainAccount</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span> <span class="nx">proof</span><span class="p">,</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">NetworkType</span><span class="p">.</span><span class="nx">MIJIN</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">tx4Signed</span> <span class="o">=</span> <span class="nx">bobPrivateChainAccount</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">tx4</span><span class="p">,</span> <span class="nx">privateChainGenerationHash</span><span class="p">);</span>
+<span class="nx">privateChainTransactionHttp</span>
+    <span class="p">.</span><span class="nx">announce</span><span class="p">(</span><span class="nx">tx4Signed</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="is-the-process-atomic">
+<h2>このプロセスはアトミックですか？<a class="headerlink" href="#is-the-process-atomic" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このプロセスはアトミックですが、デッドラインを迎える前に、完了するまで多くの時間がかかることになります:</p>
+<ul class="simple">
+<li>✅ Bob は TX2 をアナウンスしたくありません: Alice は 94 時間後に彼の資産の返還を受信します。</li>
+<li>✅ Alice は TX3 をアナウンスしません: Bob は 84 時間後に彼の資産の返還を受取ります。Alice は同様に 94 時間後に彼女の資産をアンロックします。</li>
+<li>⚠️ Alice は TX3 に署名しアナウンスします: Alice は Bob の資産を受取ります: Bob は TX1 の正当性が TX2 よりも長いため、Bob は TX4 に署名する十分な時間があります。</li>
+<li>⚠️ロールバックは歴史を書き換えます: Alice と Bob それぞれのトランザクションの承認を最低でも <code class="docutils literal"><span class="pre">maxRollBackBlocks</span></code> を待ちます。</li>
+</ul>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+
+
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>お探しのものは見つかりましたか？</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">フィードバックをください。</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/guides/secretlock/atomic-cross-chain-swap-between-NEM-public-and-private-chain.rst" rel="nofollow"> <i class="fab fa-github"></i> このページにを加筆修正する</a>
+</div>
+        <span class="title">このページ</span>
+        <ul>
+<li><a class="reference internal" href="#">パブリックとプライベート間のアトミッククロスチェイン交換</a><ul>
+<li><a class="reference internal" href="#background">背景</a></li>
+<li><a class="reference internal" href="#prerequisites">前提条件</a></li>
+<li><a class="reference internal" href="#method-01-using-the-sdk">方法 #01: SDK を使用する</a></li>
+<li><a class="reference internal" href="#is-the-process-atomic">このプロセスはアトミックですか？</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>

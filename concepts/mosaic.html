@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Mosaic &#8212; Symbol Developers</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/examplecode.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'Master',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/examplecode.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Namespace" href="namespace.html" />
+    <link rel="prev" title="Account" href="account.html" />
+  
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://nemtech.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/nemtech.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../guides/atom.xml" title="Blog">
+  
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head>
+  <body>
+
+<div class="navbar navbar-default gradient navbar-fixed-top"
+     id="navbar">
+    <div class="container navbar-top hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div id="language">
+    <label class="select">
+        <select>
+            <option id="english" value="en">EN</option>
+            <option id="japanese" value="ja">JA</option>
+            <!--<option id="chinese" value="zh_CN">中文</option>-->
+            <option id="translate" value="translate">Translate</option>
+        </select>
+    </label>
+</div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                
+                <div id="search-box">
+    <input class="search search-desktop form-control" placeholder="Search"/>
+</div>
+                
+                <ul id="social" class="list-inline">
+    <li>
+        <a href="https://twitter.com/NEMofficial" rel="nofollow"><i class="fab fa-twitter"></i></a>
+    </li>
+    <li>
+        <a href="https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU"
+           rel="nofollow"><i class="fab fa-slack"></i></a>
+    </li>
+    <li>
+        <a href="https://github.com/nemtech/" rel="nofollow"><i class="fab fa-github"></i></a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container navbar-main">
+        <div class="row">
+            <div class="navbar-header col-lg-6 col-md-4 col-xs-6">
+                <a class="navbar-brand" href="../index.html">
+                    
+                    <span><img alt="NEM logo" src="../_static/logo-symbol.svg"></span>
+                    
+                </a>
+            </div>
+            <div class="navbar-right col-lg-6 col-md-8 hidden-xs hidden-sm">
+                <ul class="list-inline">
+    <li>
+        <a href="/" class="active">Developers</a>
+    </li>
+</ul>
+            </div>
+            <div class="navbar-right col-xs-6 hidden-lg hidden-md">
+                
+                <div id="search-box">
+    <input class="search search-mobile form-control" placeholder="Search"/>
+</div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 sidebar-xs visible-xs visible-sm">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu globaltoc"><p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="account.html">Account</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mosaic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#divisibility">Divisibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-supply">Initial supply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#duration">Duration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supply-mutable">Supply mutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transferable">Transferable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restrictable">Restrictable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-fee">Creation fee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transaction-schemas">Transaction schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicdefinitiontransaction">MosaicDefinitionTransaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicsupplychangetransaction">MosaicSupplyChangeTransaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Mosaic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unresolvedmosaic">UnresolvedMosaic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicflags">MosaicFlags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicsupplychangeaction">MosaicSupplyChangeAction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributors.html">Contributors</a></li>
+</ul>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        
+
+<div class="col-md-3">
+    <div id="sidebar" class="bs-sidenav" role="complementary">
+        
+        <div class="sidebar-md hidden-xs hidden-sm">
+    <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/setup-workstation.html">Setting up your workstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/first-application.html">Writing your first application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/migration/migrating-from-nem-to-symbol.html">Migrating from NEM to Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/account/creating-an-account.html">Creating an account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transfer/sending-a-transfer-transaction.html">Sending mosaics and messages between two accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">Creating a mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/multisig/creating-a-multisig-account.html">Creating a multisig account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/running-a-test-net-node.html">Running a test net node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/network/creating-a-private-test-net.html">Creating a private test net</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/guides/category.html">More guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Built-in Features</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="account.html">Account</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mosaic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#divisibility">Divisibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-supply">Initial supply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#duration">Duration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supply-mutable">Supply mutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transferable">Transferable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restrictable">Restrictable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-fee">Creation fee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transaction-schemas">Transaction schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicdefinitiontransaction">MosaicDefinitionTransaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicsupplychangetransaction">MosaicSupplyChangeTransaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Mosaic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unresolvedmosaic">UnresolvedMosaic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicflags">MosaicFlags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mosaicsupplychangeaction">MosaicSupplyChangeAction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="namespace.html">Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-transaction.html">Transfer Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aggregate-transaction.html">Aggregate Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="account-restriction.html">Account Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mosaic-restriction.html">Mosaic Restriction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multisig-account.html">Multisig Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross-chain-swaps.html">Cross-Chain Swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin.html">Extending Symbol</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cryptography.html">Cryptography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block.html">Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transaction.html">Transaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fees.html">Fees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="receipt.html">Receipt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-validation.html">Data Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="consensus-algorithm.html">Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="harvesting.html">Harvesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inflation.html">Inflation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nemtech.github.io/catapult-whitepaper/main.pdf">Whitepaper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">REST Gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wallets.html">Wallets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributing.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/contributors.html">Contributors</a></li>
+</ul>
+
+    <p class="version">
+        <small><b>Version:</b> <a href="https://github.com/nemtech/nem2-docs/releases">0.21.4</a></small>
+    </p>
+</div>
+        
+    </div>
+</div>
+
+
+        
+        <div class="col-md-7 content">
+            
+  <div class="section" id="mosaic">
+<h1>Mosaic<a class="headerlink" href="#mosaic" title="Permalink to this headline">¶</a></h1>
+<p>Mosaics are part of what makes the Smart Asset System unique and flexible.
+They are <strong>fixed assets</strong> that can represent a set of multiple identical things that do not change.</p>
+<p>A mosaic could be a <strong>token</strong>, but it could also be a collection of more specialized assets such as reward points, shares of stock, signatures, status flags, votes or even other currencies.</p>
+<p>Each mosaic has a unique identifier represented as a 64-bit unsigned integer and a set of <a class="reference internal" href="#mosaic-properties"><span class="std std-ref">configurable properties</span></a> and flags that can be defined during the <a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html"><span class="doc">mosaic creation</span></a>.</p>
+<div class="section" id="properties">
+<span id="mosaic-properties"></span><h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>Find below the complete list of configurable properties.</p>
+<div class="section" id="divisibility">
+<h3>Divisibility<a class="headerlink" href="#divisibility" title="Permalink to this headline">¶</a></h3>
+<p>Determines the decimal place to which the mosaic can be divided.
+A divisibility of 3 means that the smallest fraction a mosaic can be divided into will be 0.001.
+The divisibility must be in the range of 0 and 6.</p>
+</div>
+<div class="section" id="initial-supply">
+<h3>Initial supply<a class="headerlink" href="#initial-supply" title="Permalink to this headline">¶</a></h3>
+<p>Indicates the amount of mosaic in circulation.
+The total supply must be in the range of 0 and <code class="docutils literal"><span class="pre">9,000,000,000,000,000</span></code> atomic units.</p>
+<p>Symbol works with <strong>absolute amounts</strong>.
+To get an absolute amount, multiply the amount of assets you want to create or send by 10<sup>divisibility</sup>.</p>
+<p>For example, if the mosaic has <strong>divisibility</strong> 2, to create or send 10 units (relative) you should define 1,000 (absolute) instead.</p>
+</div>
+<div class="section" id="duration">
+<h3>Duration<a class="headerlink" href="#duration" title="Permalink to this headline">¶</a></h3>
+<p>Specifies the number of confirmed blocks the mosaic is rented for.
+It is allowed to lie in Symbol’s public network up to <code class="docutils literal"><span class="pre">3650</span></code> days (10 years), being this maximum parameter <a class="reference internal" href="../guides/network/configuring-network-properties.html#config-network-properties"><span class="std std-ref">editable per network</span></a>.
+<strong>Non-expiring mosaics</strong> can be created by setting this property to <code class="docutils literal"><span class="pre">0</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Different from namespaces, a mosaic duration cannot be extended after its creation. Before creating one, consider if your use case requires the mosaic to expire or not.</p>
+</div>
+<p>The following formula is used to convert days to blocks approximately:</p>
+<div class="math">
+\[duration ≈ numberOfDays * 86400 / blockGenerationTargetTimeInSeconds\]</div>
+</div>
+<div class="section" id="supply-mutable">
+<h3>Supply mutable<a class="headerlink" href="#supply-mutable" title="Permalink to this headline">¶</a></h3>
+<p>If set to true, the mosaic supply can change at a later point.
+In this case, the mosaic creator is allowed to redefine the total mosaic supply with a <a class="reference internal" href="#mosaic-supply-change-transaction"><span class="std std-ref">MosaicSupplyChangeTransaction</span></a>.
+The transaction increases or decreases the mosaic supply in <code class="docutils literal"><span class="pre">delta</span></code> units.</p>
+<p>To decrease the mosaic supply, the mosaic creator account must own at least <code class="docutils literal"><span class="pre">delta</span></code> units.
+This means that the mosaic creator cannot remove mosaics from other account balances, even if the supply mutable property is enabled.</p>
+<p>If set to false, the mosaic supply remains immutable.
+However, if the mosaic creator owns all the mosaic supply, this is modifiable even if the mosaic is defined as not mutable.</p>
+</div>
+<div class="section" id="transferable">
+<h3>Transferable<a class="headerlink" href="#transferable" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id3">
+<img alt="../_images/mosaic-transferable.png" src="../_images/mosaic-transferable.png" style="width: 400px;" />
+<p class="caption"><span class="caption-text">Example of a non-transferable mosaic</span></p>
+</div>
+<p>If set to true, the mosaic can be transferred between arbitrary accounts.
+Otherwise, the mosaic can only be transferred back to the mosaic creator.</p>
+</div>
+<div class="section" id="restrictable">
+<h3>Restrictable<a class="headerlink" href="#restrictable" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id4">
+<img alt="../_images/mosaic-restriction-delegated.png" src="../_images/mosaic-restriction-delegated.png" style="width: 400px;" />
+<p class="caption"><span class="caption-text">Example of a mosaic restriction</span></p>
+</div>
+<p>If set to true, the mosaic creator can configure custom <a class="reference internal" href="mosaic-restriction.html"><span class="doc">restrictions</span></a>.</p>
+</div>
+</div>
+<div class="section" id="creation-fee">
+<span id="mosaic-rental-fee"></span><h2>Creation fee<a class="headerlink" href="#creation-fee" title="Permalink to this headline">¶</a></h2>
+<p>An account willing to create a mosaic has to pay a rental fee in addition to the <a class="reference internal" href="fees.html"><span class="doc">transaction fee</span></a>.
+Both fees will be deducted from the account’s balance after the announcement of a valid <strong>MosaicDefinitionTransaction</strong>.</p>
+<p>The <a class="reference internal" href="../api.html"><span class="doc">REST Gateway</span></a> provides an endpoint to get an estimation of how much network currency will cost you to create a mosaic:</p>
+<div class="example-code container">
+<div class="literal-block-wrapper container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/mosaic/GettingMosaicRentalFee.ts">View Code</a></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-typescript"><div class="highlight"><pre><span></span>    <span class="kr">const</span> <span class="nx">nodeUrl</span> <span class="o">=</span> <span class="s1">&#39;http://api-01.ap-northeast-1.testnet-0951-v1.symboldev.network:3000&#39;</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">repositoryHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RepositoryFactoryHttp</span><span class="p">(</span><span class="nx">nodeUrl</span><span class="p">);</span>
+
+    <span class="kr">const</span> <span class="nx">networkHttp</span> <span class="o">=</span> <span class="nx">repositoryHttp</span><span class="p">.</span><span class="nx">createNetworkRepository</span><span class="p">();</span>
+    <span class="nx">networkHttp</span><span class="p">.</span><span class="nx">getRentalFees</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">rentalFees</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rentalFees</span><span class="p">.</span><span class="nx">effectiveMosaicRentalFee</span><span class="p">.</span><span class="nx">compact</span><span class="p">());</span>
+    <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><a class="reference external" href="https://github.com/nemtech/symbol-docs/blob/master/source/resources/examples/typescript/mosaic/GettingMosaicRentalFee.js">View Code</a></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>    <span class="kr">const</span> <span class="nx">nodeUrl</span> <span class="o">=</span> <span class="s1">&#39;http://api-01.ap-northeast-1.testnet-0951-v1.symboldev.network:3000&#39;</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">repositoryHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">symbol_sdk_1</span><span class="p">.</span><span class="nx">RepositoryFactoryHttp</span><span class="p">(</span><span class="nx">nodeUrl</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">networkHttp</span> <span class="o">=</span> <span class="nx">repositoryHttp</span><span class="p">.</span><span class="nx">createNetworkRepository</span><span class="p">();</span>
+    <span class="nx">networkHttp</span><span class="p">.</span><span class="nx">getRentalFees</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">rentalFees</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rentalFees</span><span class="p">.</span><span class="nx">effectiveMosaicRentalFee</span><span class="p">.</span><span class="nx">compact</span><span class="p">());</span>
+    <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default, creating a mosaic in Symbol’s public network has an <a class="reference internal" href="../guides/network/configuring-network-properties.html#config-network-properties"><span class="std std-ref">initial cost</span></a> of <code class="docutils literal"><span class="pre">0.0005</span></code> <code class="docutils literal"><span class="pre">symbol.xym</span></code>.
+However, <strong>the network dynamically adjusts the mosaic rental fee</strong> over time.</p>
+<p>To calculate the effective rental fee, the network multiplies the default value set in the configuration by the <a class="reference internal" href="harvesting.html"><span class="doc">median network multiplier</span></a> over last <a class="reference internal" href="../guides/network/configuring-network-properties.html#config-network-properties"><span class="std std-ref">maxDifficultyBlocks</span></a>.
+In case there are zero multipliers, these are replaced by the <a class="reference internal" href="../guides/network/configuring-network-properties.html#config-network-properties"><span class="std std-ref">defaultDynamicFeeMultiplier</span></a> before the median calculation.</p>
+</div>
+<div class="section" id="guides">
+<h2>Guides<a class="headerlink" href="#guides" title="Permalink to this headline">¶</a></h2>
+<ul class="postlist-style-circle postlist">
+<li><p class="first"><a class="reference internal" href="../guides/mosaic/creating-a-mosaic.html">Creating a mosaic</a></p>
+<p>Tokenize an asset using mosaics.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../guides/mosaic/modifying-mosaic-supply.html">Modifying the mosaic supply</a></p>
+<p>If a mosaic was created with the “<strong>Supply Mutable</strong>” property, you can make more tokens or reduce the total supply.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../guides/mosaic/getting-mosaic-information.html">Getting the mosaic information</a></p>
+<p>Get the ownership, divisibility, duration, and flags for a given mosaic identifier.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="transaction-schemas">
+<h2>Transaction schemas<a class="headerlink" href="#transaction-schemas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mosaicdefinitiontransaction">
+<span id="mosaic-definition-transaction"></span><h3>MosaicDefinitionTransaction<a class="headerlink" href="#mosaicdefinitiontransaction" title="Permalink to this headline">¶</a></h3>
+<p>Announce a MosaicDefinitionTransaction to create a new mosaic.</p>
+<p><strong>Version</strong>: 0x01</p>
+<p><strong>EntityType</strong>: 0x414D</p>
+<p><strong>Inlines</strong>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="transaction.html#id2"><span class="std std-ref">Transaction</span></a> or <a class="reference internal" href="transaction.html#embedded-transaction"><span class="std std-ref">EmbeddedTransaction</span></a></li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>id</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">MosaicId</a></td>
+<td>Identifier of the mosaic.</td>
+</tr>
+<tr class="row-odd"><td>duration</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">BlockDuration</a></td>
+<td>Mosaic duration expressed in blocks. If set to 0, the mosaic is non-expiring.</td>
+</tr>
+<tr class="row-even"><td>nonce</td>
+<td>uint32</td>
+<td>Random nonce used to generate the mosaic id.</td>
+</tr>
+<tr class="row-odd"><td>flags</td>
+<td><a class="reference internal" href="#mosaic-flags"><span class="std std-ref">MosaicFlag</span></a></td>
+<td>Mosaic flags.</td>
+</tr>
+<tr class="row-even"><td>divisibility</td>
+<td>uint8</td>
+<td>Mosaic divisibility.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mosaicsupplychangetransaction">
+<span id="mosaic-supply-change-transaction"></span><h3>MosaicSupplyChangeTransaction<a class="headerlink" href="#mosaicsupplychangetransaction" title="Permalink to this headline">¶</a></h3>
+<p>Announce a supply change transaction to increase or decrease a mosaic’s supply.</p>
+<p><strong>Version</strong>: 0x01</p>
+<p><strong>EntityType</strong>: 0x424D</p>
+<p><strong>Inlines</strong>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="transaction.html#id2"><span class="std std-ref">Transaction</span></a> or <a class="reference internal" href="transaction.html#embedded-transaction"><span class="std std-ref">EmbeddedTransaction</span></a></li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mosaicId</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">UnresolvedMosaicId</a></td>
+<td>Affected mosaic identifier.</td>
+</tr>
+<tr class="row-odd"><td>delta</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">Amount</a></td>
+<td>Amount of supply to increase or decrease.</td>
+</tr>
+<tr class="row-even"><td>action</td>
+<td><a class="reference internal" href="#mosaic-supply-change-action"><span class="std std-ref">MosaicSupplyChangeAction</span></a></td>
+<td>Supply change action.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<span id="id2"></span><h3>Mosaic<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mosaicId</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">MosaicId</a></td>
+<td>Mosaic identifier.</td>
+</tr>
+<tr class="row-odd"><td>amount</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">Amount</a></td>
+<td>Mosaic amount.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="unresolvedmosaic">
+<span id="unresolved-mosaic"></span><h3>UnresolvedMosaic<a class="headerlink" href="#unresolvedmosaic" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mosaicId</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">UnresolvedMosaicId</a></td>
+<td>Mosaic identifier. If the most significant bit of byte 0 is set, a namespaceId (alias) is used instead of the real mosaic identifier.</td>
+</tr>
+<tr class="row-odd"><td>amount</td>
+<td><a class="reference external" href="https://github.com/nemtech/catbuffer/blob/master/schemas/types.cats">Amount</a></td>
+<td>Mosaic amount.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mosaicflags">
+<span id="mosaic-flags"></span><h3>MosaicFlags<a class="headerlink" href="#mosaicflags" title="Permalink to this headline">¶</a></h3>
+<p>Enumeration: uint8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Id</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>No flags present.</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>Mosaic supports supply changes even when the mosaic creator owns partial supply.</td>
+</tr>
+<tr class="row-even"><td>0x02</td>
+<td>Mosaic supports transfers between arbitrary accounts. When not set, the mosaic can only be transferred to/from the mosaic creator.</td>
+</tr>
+<tr class="row-odd"><td>0x04</td>
+<td>Mosaic creator can add rules to restrict which accounts are enabled to send and receive the mosaic.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mosaicsupplychangeaction">
+<span id="mosaic-supply-change-action"></span><h3>MosaicSupplyChangeAction<a class="headerlink" href="#mosaicsupplychangeaction" title="Permalink to this headline">¶</a></h3>
+<p>Enumeration: uint8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Id</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>Decrease.</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>Increase.</td>
+</tr>
+</tbody>
+</table>
+<p>Continue: <a class="reference internal" href="namespace.html"><span class="doc">Namespaces</span></a>.</p>
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+  
+  </div>
+
+            
+            <p class="feedback">
+                <b>Did you find what you were looking for?</b>
+                <a href="https://github.com/nemtech/symbol-docs/issues/new/choose" target="_blank">Give us your feedback.</a>
+            </p>
+            
+        </div>
+         
+
+<div class="col-md-2">
+    <div class="bs-sidenav secondary" role="complementary">
+        <div class="edit-github">
+    <a href="https://github.com/nemtech/symbol-docs/edit/master/source/concepts/mosaic.rst" rel="nofollow"> <i class="fab fa-github"></i> Improve this page</a>
+</div>
+        <span class="title">On this page</span>
+        <ul>
+<li><a class="reference internal" href="#">Mosaic</a><ul>
+<li><a class="reference internal" href="#properties">Properties</a><ul>
+<li><a class="reference internal" href="#divisibility">Divisibility</a></li>
+<li><a class="reference internal" href="#initial-supply">Initial supply</a></li>
+<li><a class="reference internal" href="#duration">Duration</a></li>
+<li><a class="reference internal" href="#supply-mutable">Supply mutable</a></li>
+<li><a class="reference internal" href="#transferable">Transferable</a></li>
+<li><a class="reference internal" href="#restrictable">Restrictable</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creation-fee">Creation fee</a></li>
+<li><a class="reference internal" href="#guides">Guides</a></li>
+<li><a class="reference internal" href="#transaction-schemas">Transaction schemas</a><ul>
+<li><a class="reference internal" href="#mosaicdefinitiontransaction">MosaicDefinitionTransaction</a></li>
+<li><a class="reference internal" href="#mosaicsupplychangetransaction">MosaicSupplyChangeTransaction</a></li>
+<li><a class="reference internal" href="#id1">Mosaic</a></li>
+<li><a class="reference internal" href="#unresolvedmosaic">UnresolvedMosaic</a></li>
+<li><a class="reference internal" href="#mosaicflags">MosaicFlags</a></li>
+<li><a class="reference internal" href="#mosaicsupplychangeaction">MosaicSupplyChangeAction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+ 
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-desktop',
+        debug: false
+    });
+
+    docsearch({
+        apiKey: 'fea87a364e2d51e3729a3a4889f7fe61',
+        indexName: 'nemtech',
+        inputSelector: '.search-mobile',
+        debug: false
+    });
+</script>
+
+  </body>
+</html>
